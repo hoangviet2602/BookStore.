@@ -10,7 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index');
 Route::get('/trang-chu', 'HomeController@index');
-
+Route::get('/admin', 'AdminController@index');
+Route::get('/show_dashboard', 'AdminController@showDashBoard');
+Route::post('/admin_dashboard','AdminController@dashboard'); 
