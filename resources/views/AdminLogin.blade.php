@@ -33,9 +33,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<form action="{{URL::to('/admin_dashboard')}}" method="post">
 			{{ csrf_field() }} 
 			<input 
-				type="email" 
+				type="text" 
 				class="ggg" 
-				name="email" 
+				name="username" 
 				placeholder="Tài khoản" 
 				required=""
 				style="font-size: 1.6rem;">

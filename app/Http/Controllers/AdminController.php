@@ -21,12 +21,18 @@ class AdminController extends Controller
 
     public function dashboard(Request $request) {
     
-        $admin_email =trim($request->email); 
+        $admin_name =trim($request->username); 
         $admin_password = trim($request->password); 
-        $result = DB::table('admin')->where('email',$admin_email)->where ('password',$admin_password)->first(); 
+
+// can sua bang
+        $result = DB::table('users')
+            ->where('username',$admin_name)
+            ->where ('password',$admin_password)
+            ->where('isadmin', 1)
+            ->first(); 
         if($result){ 
-            Session::put('name',$result->name); 
-            Session::put('id',$result->id);       
+            Session::put('name',$result->username); 
+            Session::put('id',$result->userid);       
             return view('admin.dashboard'); 
         }else{ 
             Session::put('message','mat khau hoac email khong dung, nhap lai nhe'); 
