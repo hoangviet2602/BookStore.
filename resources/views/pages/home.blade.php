@@ -15,17 +15,18 @@
                 </div>
                 <div class="khoisanpham" style="padding-bottom: 2rem;">
                     <!-- 1 san pham -->
+                    @foreach($all_product as $key => $product)
                     <div class="card">
                         <a href="Lap-trinh-ke-hoach-kinh-doanh-hieu-qua.html" class="motsanpham"
                             style="text-decoration: none; color: black;" data-toggle="tooltip" data-placement="bottom"
                             title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
-                            <img class="card-img-top anh" src="{{('public/frontend/images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg')}}"
+                            <img class="card-img-top anh" src="{{URL::to('public/frontend/images/'.$product->bookimageurl)}}"
                                 alt="lap-ke-hoach-kinh-doanh-hieu-qua">
                             <div class="card-body noidungsp mt-3">
-                                <h3 class="card-title ten">Lập Kế Hoạch Kinh Doanh Hiệu Quả</h3>
-                                <small class="tacgia text-muted">Brian Finch</small>
+                                <h3 class="card-title ten">{{$product->bookname}}</h3>
+                                <small class="tacgia text-muted">{{$product->nxbid}}</small>
                                 <div class="gia d-flex align-items-baseline">
-                                    <div class="giamoi">111.200 ₫</div>
+                                    <div class="giamoi">{{number_format($product->price)}} ₫</div>
                                     <div class="giacu text-muted">139.000 ₫</div>
                                     <div class="sale">-20%</div>
                                 </div>
@@ -42,197 +43,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="card">
-                        <a href="Ma-bun-luu-manh-va-nhung-cau-chuyen-khac-cua-nguyen-tri.html" class="motsanpham"
-                            style="text-decoration: none; color: black;" data-toggle="tooltip" data-placement="bottom"
-                            title="Ma Bùn Lưu Manh Và Những Câu Chuyện Khác Của Nguyễn
-                        Trí">
-                            <img class="card-img-top anh" src="{{('public/frontend/images/ma-bun-luu-manh.jpg')}}" alt="ma-bun-luu-manh">
-                            <div class="card-body noidungsp mt-3">
-                                <h3 class="card-title ten">Ma Bùn Lưu Manh Và Những Câu Chuyện Khác Của Nguyễn
-                                    Trí</h3>
-                                <small class="tacgia text-muted">Nguyễn Trí</small>
-                                <div class="gia d-flex align-items-baseline">
-                                    <div class="giamoi">68.000 ₫</div>
-                                    <div class="giacu text-muted">85.000 ₫</div>
-                                    <div class="sale">-20%</div>
-                                </div>
-                                <div class="danhgia">
-                                    <ul class="d-flex" style="list-style: none;">
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><span class="text-muted">0 nhận xét</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card">
-                        <a href="#" class="motsanpham" style="text-decoration: none; color: black;"
-                            data-toggle="tooltip" data-placement="bottom"
-                            title="Bank 4.0 - Giao dịch mọi nơi, không chỉ là ngân hàng">
-                            <img class="card-img-top anh" src="{{('public/frontend/images/bank-4.0.jpg')}}" alt="bank-4.0">
-                            <div class="card-body noidungsp mt-3">
-                                <h3 class="card-title ten">Bank 4.0 - Giao dịch mọi nơi, không chỉ là ngân hàng
-                                </h3>
-                                <small class="tacgia text-muted">Brett King</small>
-                                <div class="gia d-flex align-items-baseline">
-                                    <div class="giamoi">111.200 ₫</div>
-                                    <div class="giacu text-muted">139.000 ₫</div>
-                                    <div class="sale">-20%</div>
-                                </div>
-                                <div class="danhgia">
-                                    <ul class="d-flex" style="list-style: none;">
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><span class="text-muted">0 nhận xét</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card">
-                        <a href="#" class="motsanpham" style="text-decoration: none; color: black;"
-                            data-toggle="tooltip" data-placement="bottom" title="Bộ Sách 500 Câu Chuyện Đạo Đức - Những Câu Chuyện
-                        Tình Thân (Bộ 8 Cuốn)">
-                            <img class="card-img-top anh" src="{{('public/frontend/images/bo-sach-500-cau-chuyen-dao-duc.jpg')}}"
-                                alt="bo-sach-500-cau-chuyen-dao-duc">
-                            <div class="card-body noidungsp mt-3">
-                                <h3 class="card-title ten">Bộ Sách 500 Câu Chuyện Đạo Đức - Những Câu Chuyện
-                                    Tình Thân (Bộ 8 Cuốn)</h3>
-                                <small class="tacgia text-muted">Nguyễn Hạnh - Trần Thị Thanh Nguyên</small>
-                                <div class="gia d-flex align-items-baseline">
-                                    <div class="giamoi">111.200 ₫</div>
-                                    <div class="giacu text-muted">139.000 ₫</div>
-                                    <div class="sale">-20%</div>
-                                </div>
-                                <div class="danhgia">
-                                    <ul class="d-flex" style="list-style: none;">
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><span class="text-muted">0 nhận xét</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card">
-                        <a href="#" class="motsanpham" style="text-decoration: none; color: black;"
-                            data-toggle="tooltip" data-placement="bottom"
-                            title="Lịch Sử Ung Thư - Hoàng Đế Của Bách Bệnh">
-                            <img class="card-img-top anh" src="{{('public/frontend/images/ung-thu-hoang-de-cua-bach-benh.jpg')}}"
-                                alt="ung-thu-hoang-de-cua-bach-benh">
-                            <div class="card-body noidungsp mt-3">
-                                <h3 class="card-title ten">Lịch Sử Ung Thư - Hoàng Đế Của Bách Bệnh</h3>
-                                <small class="tacgia text-muted">Siddhartha Mukherjee</small>
-                                <div class="gia d-flex align-items-baseline">
-                                    <div class="giamoi">111.200 ₫</div>
-                                    <div class="giacu text-muted">139.000 ₫</div>
-                                    <div class="sale">-20%</div>
-                                </div>
-                                <div class="danhgia">
-                                    <ul class="d-flex" style="list-style: none;">
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><span class="text-muted">0 nhận xét</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card">
-                        <a href="#" class="motsanpham" style="text-decoration: none; color: black;"
-                            data-toggle="tooltip" data-placement="bottom"
-                            title="Cuốn Sách Khám Phá: Trời Đêm Huyền Diệu">
-                            <img class="card-img-top anh" src="{{('public/frontend/images/troi-dem-huyen-dieu.jpg')}}"
-                                alt="troi-dem-huyen-dieu">
-                            <div class="card-body noidungsp mt-3">
-                                <h3 class="card-title ten">Cuốn Sách Khám Phá: Trời Đêm Huyền Diệu</h3>
-                                <small class="tacgia text-muted">Disney Learning</small>
-                                <div class="gia d-flex align-items-baseline">
-                                    <div class="giamoi">111.200 ₫</div>
-                                    <div class="giacu text-muted">139.000 ₫</div>
-                                    <div class="sale">-20%</div>
-                                </div>
-                                <div class="danhgia">
-                                    <ul class="d-flex" style="list-style: none;">
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><span class="text-muted">0 nhận xét</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card">
-                        <a href="#" class="motsanpham" style="text-decoration: none; color: black;"
-                            data-toggle="tooltip" data-placement="bottom"
-                            title="Bộ Sách Những Câu Chuyện Cho Con Thành Người Tử Tế (Bộ 5 Cuốn)">
-                            <img class="card-img-top anh"
-                                src="{{('public/frontend/images/bo-sach-nhung-cau-chuyen-cho-con-thanh-nguoi-tu-te.jpg')}}"
-                                alt="bo-sach-nhung-cau-chuyen-cho-con-thanh-nguoi-tu-te">
-                            <div class="card-body noidungsp mt-3">
-                                <h3 class="card-title ten">Bộ Sách Những Câu Chuyện Cho Con Thành Người Tử Tế (Bộ 5
-                                    Cuốn)</h3>
-                                <small class="tacgia text-muted">Nhiều Tác Giả</small>
-                                <div class="gia d-flex align-items-baseline">
-                                    <div class="giamoi">111.200 ₫</div>
-                                    <div class="giacu text-muted">139.000 ₫</div>
-                                    <div class="sale">-20%</div>
-                                </div>
-                                <div class="danhgia">
-                                    <ul class="d-flex" style="list-style: none;">
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><span class="text-muted">0 nhận xét</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card">
-                        <a href="#" class="motsanpham" style="text-decoration: none; color: black;"
-                            data-toggle="tooltip" data-placement="bottom" title="Lịch Sử Thế Giới">
-                            <img class="card-img-top anh" src="{{('public/frontend/images/lich-su-the-gioi.jpg')}}" alt="lich-su-the-gioi">
-                            <div class="card-body noidungsp mt-3">
-                                <h3 class="card-title ten">Lịch Sử Thế Giới</h3>
-                                <small class="tacgia text-muted">Nam Phong tùng thư - Phạm Quỳnh chủ nhiệm</small>
-                                <div class="gia d-flex align-items-baseline">
-                                    <div class="giamoi">111.200 ₫</div>
-                                    <div class="giacu text-muted">139.000 ₫</div>
-                                    <div class="sale">-20%</div>
-                                </div>
-                                <div class="danhgia">
-                                    <ul class="d-flex" style="list-style: none;">
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><span class="text-muted">0 nhận xét</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -276,199 +87,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="card">
-                        <a href="#" class="motsanpham" style="text-decoration: none; color: black;"
-                            data-toggle="tooltip" data-placement="bottom"
-                            title="Combo Mẹ Con Sư Tử - Bồ Tát Ngàn Tay Ngàn Mắt">
-                            <img class="card-img-top anh" src="{{('public/frontend/images/combo-me-con-su-tu-bo-tat-ngan-tay-ngan-mat.jpg')}}"
-                                alt="combo-me-con-su-tu-bo-tat-ngan-tay-ngan-mat">
-                            <div class="card-body noidungsp mt-3">
-                                <h3 class="card-title ten">Combo Mẹ Con Sư Tử - Bồ Tát Ngàn Tay Ngàn Mắt</h3>
-                                <small class="tacgia text-muted">Thích Nhất Hạnh</small>
-                                <div class="gia d-flex align-items-baseline">
-                                    <div class="giamoi">111.200 ₫</div>
-                                    <div class="giacu text-muted">139.000 ₫</div>
-                                    <div class="sale">-20%</div>
-                                </div>
-                                <div class="danhgia">
-                                    <ul class="d-flex" style="list-style: none;">
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><span class="text-muted">0 nhận xét</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card">
-                        <a href="#" class="motsanpham" style="text-decoration: none; color: black;"
-                            data-toggle="tooltip" data-placement="bottom" title="Combo Osho: Hạnh Phúc Tại Tâm, Can Đảm Biến Thách Thức Thành
-                            Sức Mạnh & Sáng Tạo Bừng Cháy Sức Mạnh Bên Trong">
-                            <img class="card-img-top anh" src="{{('public/frontend/images/combo-hanh-phuc-sang-tao.jpg')}}"
-                                alt="combo-hanh-phuc-sang-tao">
-                            <div class="card-body noidungsp mt-3">
-                                <h3 class="card-title ten">Combo Osho: Hạnh Phúc Tại Tâm, Can Đảm Biến Thách Thức Thành
-                                    Sức Mạnh & Sáng Tạo Bừng Cháy Sức Mạnh Bên Trong
-                                </h3>
-                                <small class="tacgia text-muted">Gosho Aoyama, Mutsuki Watanabe, Takahisa Taira</small>
-                                <div class="gia d-flex align-items-baseline">
-                                    <div class="giamoi">111.200 ₫</div>
-                                    <div class="giacu text-muted">139.000 ₫</div>
-                                    <div class="sale">-20%</div>
-                                </div>
-                                <div class="danhgia">
-                                    <ul class="d-flex" style="list-style: none;">
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><span class="text-muted">0 nhận xét</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card">
-                        <a href="#" class="motsanpham" style="text-decoration: none; color: black;"
-                            data-toggle="tooltip" data-placement="bottom"
-                            title="Combo Giáo Dục Và Ý Nghĩa Cuộc Sống Và Bạn Đang Nghịch Gì Với Đời Mình?">
-                            <img class="card-img-top anh" src="{{('public/frontend/images/combo-giao-duc-va-y-nghia-cuoc-song.jpg')}}"
-                                alt="combo-giao-duc-va-y-nghia-cuoc-song">
-                            <div class="card-body noidungsp mt-3">
-                                <h3 class="card-title ten">Combo Giáo Dục Và Ý Nghĩa Cuộc Sống Và Bạn Đang Nghịch Gì Với
-                                    Đời Mình?</h3>
-                                <small class="tacgia text-muted"> J.Krishnamurti</small>
-                                <div class="gia d-flex align-items-baseline">
-                                    <div class="giamoi">111.200 ₫</div>
-                                    <div class="giacu text-muted">139.000 ₫</div>
-                                    <div class="sale">-20%</div>
-                                </div>
-                                <div class="danhgia">
-                                    <ul class="d-flex" style="list-style: none;">
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><span class="text-muted">0 nhận xét</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card">
-                        <a href="#" class="motsanpham" style="text-decoration: none; color: black;"
-                            data-toggle="tooltip" data-placement="bottom"
-                            title="Combo Dinh Dưỡng Xanh - Thần dược xanh">
-                            <img class="card-img-top anh" src="{{('public/frontend/images/combo-dinh-duong-than-duoc-xanh.jpg')}}"
-                                alt="combo-dinh-duong-than-duoc-xanh">
-                            <div class="card-body noidungsp mt-3">
-                                <h3 class="card-title ten">Combo Dinh Dưỡng Xanh - Thần dược xanh</h3>
-                                <small class="tacgia text-muted">Ryu Seung-SunVictoria Boutenko</small>
-                                <div class="gia d-flex align-items-baseline">
-                                    <div class="giamoi">111.200 ₫</div>
-                                    <div class="giacu text-muted">139.000 ₫</div>
-                                    <div class="sale">-20%</div>
-                                </div>
-                                <div class="danhgia">
-                                    <ul class="d-flex" style="list-style: none;">
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><span class="text-muted">0 nhận xét</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card">
-                        <a href="#" class="motsanpham" style="text-decoration: none; color: black;"
-                            data-toggle="tooltip" data-placement="bottom"
-                            title="Combo Ăn Xanh Để Khỏe - Sống Lành Để Trẻ">
-                            <img class="card-img-top anh" src="{{('public/frontend/images/combo-an-xanh-song-lanh.jpg')}}"
-                                alt="combo-an-xanh-song-lanh">
-                            <div class="card-body noidungsp mt-3">
-                                <h3 class="card-title ten">Combo Ăn Xanh Để Khỏe - Sống Lành Để Trẻ</h3>
-                                <small class="tacgia text-muted">Norman W. Walker</small>
-                                <div class="gia d-flex align-items-baseline">
-                                    <div class="giamoi">111.200 ₫</div>
-                                    <div class="giacu text-muted">139.000 ₫</div>
-                                    <div class="sale">-20%</div>
-                                </div>
-                                <div class="danhgia">
-                                    <ul class="d-flex" style="list-style: none;">
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><span class="text-muted">0 nhận xét</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card">
-                        <a href="#" class="motsanpham" style="text-decoration: none; color: black;"
-                            data-toggle="tooltip" data-placement="bottom"
-                            title="Combo Lược Sử Loài Người - Lược Sử Tương Lai - 21 Bài Học Cho Thế Kỷ 21">
-                            <img class="card-img-top anh" src="{{('public/frontend/images/combo-luoc-su-loai-nguoi.jpg')}}"
-                                alt="combo-luoc-su-loai-nguoi">
-                            <div class="card-body noidungsp mt-3">
-                                <h3 class="card-title ten">Combo Lược Sử Loài Người - Lược Sử Tương Lai - 21 Bài Học Cho
-                                    Thế Kỷ 21</h3>
-                                <small class="tacgia text-muted">Yuval Noah Harari</small>
-                                <div class="gia d-flex align-items-baseline">
-                                    <div class="giamoi">111.200 ₫</div>
-                                    <div class="giacu text-muted">139.000 ₫</div>
-                                    <div class="sale">-20%</div>
-                                </div>
-                                <div class="danhgia">
-                                    <ul class="d-flex" style="list-style: none;">
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><span class="text-muted">0 nhận xét</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card">
-                        <a href="#" class="motsanpham" style="text-decoration: none; color: black;"
-                            data-toggle="tooltip" data-placement="bottom" title="Bộ Sách Phong Cách Sống (Bộ 5 Cuốn)">
-                            <img class="card-img-top anh" src="{{('public/frontend/images/combo-phong-cach-song.jpg')}}"
-                                alt="combo-phong-cach-song">
-                            <div class="card-body noidungsp mt-3">
-                                <h3 class="card-title ten">Bộ Sách Phong Cách Sống (Bộ 5 Cuốn)</h3>
-                                <small class="tacgia text-muted">Marie Tourell Soderberg, Joanna Nylund, Yukari
-                                    Mitsuhashi, Margareta Magnusson, Linnea Dunne</small>
-                                <div class="gia d-flex align-items-baseline">
-                                    <div class="giamoi">111.200 ₫</div>
-                                    <div class="giacu text-muted">139.000 ₫</div>
-                                    <div class="sale">-20%</div>
-                                </div>
-                                <div class="danhgia">
-                                    <ul class="d-flex" style="list-style: none;">
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><span class="text-muted">0 nhận xét</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -490,7 +109,7 @@
                     <div class="card">
                         <a href="#" class="motsanpham" style="text-decoration: none; color: black;"
                             data-toggle="tooltip" data-placement="bottom" title="Ngoại Giao Của Chính Quyền Sài Gòn">
-                            <img class="card-img-top anh" src="{{('public/frontend/images/ngoai-giao-cua-chinh-quyen-sai-gon.jpg')}}"
+                            <img class="card-img-top anh" src="{{URL::to('public/frontend/images/'.$product->bookimageurl)}}"
                                 alt="ngoai-giao-cua-chinh-quyen-sai-gon">
                             <div class="card-body noidungsp mt-3">
                                 <h3 class="card-title ten">Ngoại Giao Của Chính Quyền Sài Gòn</h3>
@@ -510,75 +129,8 @@
                             </div>
                         </a>
                     </div>
-                    <div class="card">
-                        <a href="#" class="motsanpham" style="text-decoration: none; color: black;"
-                            data-toggle="tooltip" data-placement="bottom" title="Đường Mây Trên Đất Hoa">
-                            <img class="card-img-top anh" src="{{('public/frontend/images/duong-may-tren-dat-hoa.jpg')}}"
-                                alt="duong-may-tren-dat-hoa">
-                            <div class="card-body noidungsp mt-3">
-                                <h3 class="card-title ten">Đường Mây Trên Đất Hoa</h3>
-                                <small class="tacgia text-muted">Brian Finch</small>
-                                <div class="gia d-flex align-items-baseline">
-                                </div>
-                                <div class="danhgia">
-                                    <ul class="d-flex" style="list-style: none;">
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><span class="text-muted">0 nhận xét</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card">
-                        <a href="#" class="motsanpham" style="text-decoration: none; color: black;"
-                            data-toggle="tooltip" data-placement="bottom" title="Muôn Kiếp Nhân Sinh">
-                            <img class="card-img-top anh" src="{{('public/frontend/images/muon-kiep-nhan-sinh.jpg')}}"
-                                alt="muon-kiep-nhan-sinh">
-                            <div class="card-body noidungsp mt-3">
-                                <h3 class="card-title ten">Muôn Kiếp Nhân Sinh</h3>
-                                <small class="tacgia text-muted">Brian Finch</small>
-                                <div class="gia d-flex align-items-baseline">
-                                </div>
-                                <div class="danhgia">
-                                    <ul class="d-flex" style="list-style: none;">
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><span class="text-muted">0 nhận xét</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card">
-                        <a href="#" class="motsanpham" style="text-decoration: none; color: black;"
-                            data-toggle="tooltip" data-placement="bottom" title="Đường Mây Trong Cõi Mộng">
-                            <img class="card-img-top anh" src="{{('public/frontend/images/duong-may-trong-coi-mong.jpg')}}"
-                                alt="duong-may-trong-coi-mong.jpg">
-                            <div class="card-body noidungsp mt-3">
-                                <h3 class="card-title ten">Đường Mây Trong Cõi Mộng</h3>
-                                <small class="tacgia text-muted">Brian Finch</small>
-                                <div class="gia d-flex align-items-baseline">
-                                </div>
-                                <div class="danhgia">
-                                    <ul class="d-flex" style="list-style: none;">
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li class="active"><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><span class="text-muted">0 nhận xét</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+  
+                
                 </div>
             </div>
         </div>
@@ -601,7 +153,7 @@
                             <a href="#" class="motsanpham" style="text-decoration: none; color: black;"
                                 data-toggle="tooltip" data-placement="bottom"
                                 title="Từng bước chân nở hoa: Khi câu kinh bước tới">
-                                <img class="card-img-top anh" src="{{('public/frontend/images/tung-buoc-chan-no-hoa.jpg')}}"
+                                <img class="card-img-top anh" src="images/tung-buoc-chan-no-hoa.jpg"
                                     alt="tung-buoc-chan-no-hoa">
                                 <div class="card-body noidungsp mt-3">
                                     <h3 class="card-title ten">Từng bước chân nở hoa: Khi câu kinh bước tới</h3>
@@ -611,64 +163,10 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg col-sm-4">
-                        <div class="card">
-                            <a href="#" class="motsanpham" style="text-decoration: none; color: black;"
-                                data-toggle="tooltip" data-placement="bottom" title="Cảm ơn vì đã được thương">
-                                <img class="card-img-top anh" src="{{('public/frontend/images/cam-on-vi-da-duoc-thuong.jpg')}}"
-                                    alt="cam-on-vi-da-duoc-thuong">
-                                <div class="card-body noidungsp mt-3">
-                                    <h3 class="card-title ten">Cảm ơn vì đã được thương</h3>
-                                    <small class="thoigian text-muted">31/03/2020</small>
-                                    <div><a class="detail" href="#">Xem chi tiết</a></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg col-sm-4">
-                        <div class="card">
-                            <a href="#" class="motsanpham" style="text-decoration: none; color: black;"
-                                data-toggle="tooltip" data-placement="bottom"
-                                title="Hào quang của vua Gia Long trong mắt Michel Gaultier">
-                                <img class="card-img-top anh" src="{{('public/frontend/images/vua-gia-long.jpg')}}" alt="vua-gia-long">
-                                <div class="card-body noidungsp mt-3">
-                                    <h3 class="card-title ten">Hào quang của vua Gia Long trong mắt Michel Gaultier</h3>
-                                    <small class="thoigian text-muted">21/03/2020</small>
-                                    <div><a class="detail" href="#">Xem chi tiết</a></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg col-sm-4">
-                        <div class="card">
-                            <a href="#" class="motsanpham" style="text-decoration: none; color: black;"
-                                data-toggle="tooltip" data-placement="bottom"
-                                title="Suối nguồn” và cái tôi hiện sinh trong từng cá thể">
-                                <img class="card-img-top anh" src="{{('public/frontend/images/suoi-nguon-va-cai-toi-trong-tung-ca-the.jpg')}}"
-                                    alt="suoi-nguon-va-cai-toi-trong-tung-ca-the">
-                                <div class="card-body noidungsp mt-3">
-                                    <h3 class="card-title ten">"Suối nguồn” và cái tôi hiện sinh trong từng cá thể</h3>
-                                    <small class="thoigian text-muted">16/03/2020</small>
-                                    <div><a class="detail" href="#">Xem chi tiết</a></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg col-sm-4">
-                        <div class="card cuoicung">
-                            <a href="#" class="motsanpham" style="text-decoration: none; color: black;"
-                                data-toggle="tooltip" data-placement="bottom"
-                                title="Đại dịch trên những con đường tơ lụa">
-                                <img class="card-img-top anh" src="{{('public/frontend/images/dai-dich-tren-con-duong-to-lua.jpg')}}"
-                                    alt="dai-dich-tren-con-duong-to-lua">
-                                <div class="card-body noidungsp mt-3">
-                                    <h3 class="card-title ten">Đại dịch trên những con đường tơ lụa</h3>
-                                    <small class="thoigian text-muted">16/03/2020</small>
-                                    <div><a class="detail" href="#">Xem chi tiết</a></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                  
+                  
+                    
+                
                 </div>
             </div>
             <hr>

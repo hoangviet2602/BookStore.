@@ -13,8 +13,14 @@
 
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
+//user
 Route::get('/', 'HomeController@index');
 Route::get('/trang-chu', 'HomeController@index');
+Route::get('/danh-muc-san-pham/{categoryid}', 'CategoryProduct@show_category_home');
+
+
+
+//admin
 Route::get('/admin', 'AdminController@index');
 Route::get('/show_dashboard', 'AdminController@showDashBoard');
 Route::post('/admin_dashboard','AdminController@dashboard'); 
