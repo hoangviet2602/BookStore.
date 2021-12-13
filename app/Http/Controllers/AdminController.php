@@ -15,8 +15,18 @@ class AdminController extends Controller
         return view('AdminLogin');
     }
 
+    public function AuthLogin(){ 
+        $admin_id = Session::get('id'); 
+        if($admin_id){ 
+            return Redirect::to('dashboard'); 
+        }else{ 
+            return Redirect::to('admin')->send(); 
+        } 
+    } 
+
     public function showDashBoard() {
-        return view('admin.DashBoard');
+        $this->AuthLogin();
+        return view('admin.dashboard');
     }
 
     public function dashboard(Request $request) {
