@@ -109,7 +109,7 @@
                     <div class="card">
                         <a href="#" class="motsanpham" style="text-decoration: none; color: black;"
                             data-toggle="tooltip" data-placement="bottom" title="Ngoại Giao Của Chính Quyền Sài Gòn">
-                            <img class="card-img-top anh" src="{{URL::to('public/frontend/images/'.$product->bookimageurl)}}"
+                            <img class="card-img-top anh" src=""
                                 alt="ngoai-giao-cua-chinh-quyen-sai-gon">
                             <div class="card-body noidungsp mt-3">
                                 <h3 class="card-title ten">Ngoại Giao Của Chính Quyền Sài Gòn</h3>
