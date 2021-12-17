@@ -62,7 +62,9 @@
             </td>  -->
 
             <td>
-              <button class="btn btn-warning">Sửa</button>
+              <button class="btn btn-warning">
+                <a href="{{URL::to('/update_nxb/'.$nxb->nxbid)}}">Sửa</a>
+              </button>
               <button class="btn btn-danger">
                 <a href="{{URL::to('/delete_nxb/'.$nxb->nxbid)}}">Xóa</a>
               </button>

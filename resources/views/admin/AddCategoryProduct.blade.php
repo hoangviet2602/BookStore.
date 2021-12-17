@@ -1,3 +1,4 @@
+ADDCATEGORY
 @extends('AdminLayout') 
 @section('admin_content') 
     <div class="row"> 
@@ -19,10 +20,15 @@
                                 <input type="text" class="form-control" name="category_name"> 
                             </div> 
 
+                            <div class="form-group"> 
+                                <label for="category_pid">Id danh mục cha (nếu có)</label> 
+                                <input type="text" class="form-control" name="category_pid"> 
+                            </div> 
+
                             <button type="submit" class="btn btn-info">Thêm</button> 
                         </form> 
                     </div> 
                 </div> 
-            </section> 
+            </div> 
         </div>    
 @endsection

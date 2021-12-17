@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 
 class CategoryProduct extends Controller
 {
-    // begin admin
+    // BEGIN ADMIN
     public function auth_login_admin() {
         $admin_id = Session::get('id'); 
         if($admin_id){ 
@@ -35,6 +35,14 @@ class CategoryProduct extends Controller
         return view('admin.AddCategoryProduct');
     }
 
+    public function show_form_edit_category($id) {
+        $this->auth_login_admin();
+        $category = DB::table('categories')->where('categoryid', $id)->get();
+        $manager_category = view('admin.EditCategory')
+                            ->with('category', $category);
+        return $manager_category;
+    }
+
     public function add_category(Request $request) {
         $this->auth_login_admin();
         if($request->category_name) {
@@ -54,15 +62,31 @@ class CategoryProduct extends Controller
         return Redirect::to('all_category');
     }
 
-    public function update_category() {
-
+    public function update_category(Request $request) {
+        $this->auth_login_admin();
+        if($request->category_id) {
+            $category = array();
+            $category['categoryname'] = trim($request->category_name);
+            // $category['parentId'] = trim($request->category_pid);
+            DB::table('categories')
+                ->where('categoryid', $request->category_id)
+                ->update($category);
+            Session::put('message', 'Update danh mục thành công');
+            return Redirect::to('all_category');
+        }
     }
 
-    // end admin
+    // END ADMIN
 
     //user
     public  function show_category_home($categoryid){
-        return view('category.show_category');
+        
+        $cate_product = DB::table('categories')->get(); 
+        $category_by_id = DB::table('books')->join('categories','books.categoryid','=','categories.categoryid')->where(
+            'books.categoryid',$categoryid)->get();
+        $category_name = DB::table('categories')->where('categories.categoryid',$categoryid)->limit(1)->get();
+        return view('pages.category.show_category')->with('category',$cate_product)->with('category_by_id',$category_by_id)->with(
+            'category_name',$category_name);
     }
 
 }
