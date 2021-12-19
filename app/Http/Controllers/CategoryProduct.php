@@ -70,5 +70,5 @@ class CategoryProduct extends Controller
         return view('pages.category.show_category')->with('category',$cate_product)->with('category_by_id',$category_by_id)->with(
             'category_name',$category_name);
     }
-
+    
 }

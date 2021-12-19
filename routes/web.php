@@ -17,10 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index');
 Route::get('/trang-chu', 'HomeController@index');
 Route::get('/danh-muc-san-pham/{categoryid}', 'CategoryProduct@show_category_home');
+Route::get('/chi-tiet-san-pham/{bookid}', 'ProductController@details_product');
 
 
 
-//admin
+
 
 
 // BEGIN ADMIN

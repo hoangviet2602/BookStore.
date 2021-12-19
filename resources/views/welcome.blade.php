@@ -23,20 +23,26 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
         rel="stylesheet">
-
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('public/frontend/slick/slick.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{asset('public/frontend/slick/slick-theme.css')}}" />
     <script type="text/javascript" src="{{asset('public/frontend/slick/slick.min.js')}}"></script>
     <script type="text/javascript"
         src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+        
     <link rel="canonical" href="http://dealbook.xyz/">
     <meta name="google-site-verification" content="urDZLDaX8wQZ_-x8ztGIyHqwUQh2KRHvH9FhfoGtiEw" />
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
-    <link rel="manifest" href="favicon_io/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('public/frontend/favicon_io/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('public/frontend/favicon_io/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('public/frontend/favicon_io/favicon-16x16.png')}}">
+    <link rel="manifest" href="{{asset('public/frontend/favicon_io/site.webmanifest')}}">
     <style>img[alt="www.000webhost.com"]{display: none;}</style>
+
+
 </head>
+
+
 
 <body>
     <!-- code cho nut like share facebook  -->
@@ -236,66 +242,7 @@
         </div>
     </section>
 
-    <!-- noi dung danh muc sach(categories) + banner slider -->
-    <section class="header bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3" style="margin-right: -15px;">
-                    <!-- CATEGORIES -->
-                    <div class="categorycontent">
-                        <ul>
-                            @foreach($category as $key => $cate)
-                            <li> <a href="{{URL::to('/danh-muc-san-pham/'.$cate->categoryid)}}">{{$cate->categoryname}}</a><i class="fa fa-chevron-right float-right"></i>
-                             <!--  <ul>
-                                    <li class="liheader"><a href="#" class="header text-uppercase">Sách Kinh Tế - Kỹ
-                                            Năng</a></li>
-                                    <div class="content trai">
-                                        <li><a href="#">Kinh Tế - Chính Trị</a></li>                                   
-                                    </div>
-                                    <div class="content phai">
-                                        <li><a href="#">Nhân Vật - Bài Học Kinh Doanh</a></li>                                   
-                                    </div>
-                                </ul> -->
-                            </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-                <!-- banner slider  -->
-                <div class="col-md-9 px-0">
-                    <div id="carouselId" class="carousel slide" data-ride="carousel">
-                        <ol class="nutcarousel carousel-indicators rounded-circle">
-                            <li data-target="#carouselId" data-slide-to="0" class="active"></li>
-                            <li data-target="#carouselId" data-slide-to="1"></li>
-                            <li data-target="#carouselId" data-slide-to="2"></li>
-                        </ol>
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <a href="#"><img src="{{asset('public/frontend/images/banner-sach-moi.jpg')}}" class="img-fluid"
-                                        style="height: 386px;" width="900px" alt="First slide"></a>
-                            </div>
-                            <div class="carousel-item">
-                                <a href="#"><img src="{{asset('public/frontend/images/banner-beethoven.jpg')}}" class="img-fluid"
-                                        style="height: 386px;" width="900px" alt="Second slide"></a>
-                            </div>
-                            <div class="carousel-item">
-                                <a href="#"><img src="{{asset('public/frontend/images/neu-toi-biet-duoc-khi-20-full-banner.jpg')}}" class="img-fluid"
-                                        style="height: 386px;" alt="Third slide"></a>
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carouselId" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselId" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+   
       <!-- start body ........ -->
         @yield('content')
      <!--end body ........ -->

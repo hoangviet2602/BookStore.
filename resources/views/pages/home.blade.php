@@ -1,7 +1,66 @@
 @extends('welcome')
 @section('content')
 
-
+     <!-- noi dung danh muc sach(categories) + banner slider -->
+     <section class="header bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3" style="margin-right: -15px;">
+                    <!-- CATEGORIES -->
+                    <div class="categorycontent">
+                        <ul>
+                            @foreach($category as $key => $cate)
+                            <li> <a href="{{URL::to('/danh-muc-san-pham/'.$cate->categoryid)}}">{{$cate->categoryname}}</a><i class="fa fa-chevron-right float-right"></i>
+                             <!--  <ul>
+                                    <li class="liheader"><a href="#" class="header text-uppercase">Sách Kinh Tế - Kỹ
+                                            Năng</a></li>
+                                    <div class="content trai">
+                                        <li><a href="#">Kinh Tế - Chính Trị</a></li>                                   
+                                    </div>
+                                    <div class="content phai">
+                                        <li><a href="#">Nhân Vật - Bài Học Kinh Doanh</a></li>                                   
+                                    </div>
+                                </ul> -->
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+                <!-- banner slider  -->
+                <div class="col-md-9 px-0">
+                    <div id="carouselId" class="carousel slide" data-ride="carousel">
+                        <ol class="nutcarousel carousel-indicators rounded-circle">
+                            <li data-target="#carouselId" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselId" data-slide-to="1"></li>
+                            <li data-target="#carouselId" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <a href="#"><img src="{{asset('public/frontend/images/banner-sach-moi.jpg')}}" class="img-fluid"
+                                        style="height: 386px;" width="900px" alt="First slide"></a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="#"><img src="{{asset('public/frontend/images/banner-beethoven.jpg')}}" class="img-fluid"
+                                        style="height: 386px;" width="900px" alt="Second slide"></a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="#"><img src="{{asset('public/frontend/images/neu-toi-biet-duoc-khi-20-full-banner.jpg')}}" class="img-fluid"
+                                        style="height: 386px;" alt="Third slide"></a>
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselId" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselId" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- khoi sach moi  -->
     <section class="_1khoi sachmoi bg-white">
         <div class="container">
@@ -17,7 +76,7 @@
                     <!-- 1 san pham -->
                     @foreach($all_product as $key => $product)
                     <div class="card">
-                        <a href="Lap-trinh-ke-hoach-kinh-doanh-hieu-qua.html" class="motsanpham"
+                        <a href="{{URL::to('/chi-tiet-san-pham/'.$product->bookid)}}" class="motsanpham"
                             style="text-decoration: none; color: black;" data-toggle="tooltip" data-placement="bottom"
                             title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
                             <img class="card-img-top anh" src="{{URL::to('public/frontend/images/'.$product->bookimageurl)}}"
