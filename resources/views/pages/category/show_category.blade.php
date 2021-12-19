@@ -23,7 +23,7 @@
                             <div class="col-lg-3 col-md-4 col-xs-6 item DeanGraziosi">
                             @foreach($category_by_id as $key => $product)    
                                 <div class="card ">
-                                    <a href="product-item.html" class="motsanpham"
+                                    <a href="{{URL::to('/chi-tiet-san-pham/'.$product->bookid)}}" class="motsanpham"
                                         style="text-decoration: none; color: black;" data-toggle="tooltip"
                                         data-placement="bottom" title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
                                         <img class="card-img-top anh" src="{{URL::to('./public/frontend/images/'.$product->bookimageurl)}}"
