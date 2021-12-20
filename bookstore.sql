@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 07, 2021 lúc 04:54 AM
+-- Thời gian đã tạo: Th12 20, 2021 lúc 09:47 AM
 -- Phiên bản máy phục vụ: 10.4.21-MariaDB
 -- Phiên bản PHP: 7.3.31
 
@@ -54,6 +54,13 @@ CREATE TABLE `books` (
   `timestamp` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
+--
+-- Đang đổ dữ liệu cho bảng `books`
+--
+
+INSERT INTO `books` (`bookid`, `bookname`, `bookimageurl`, `bookdescription`, `bookpages`, `bookweight`, `releasedate`, `nxbid`, `categoryid`, `quantity`, `price`, `timestamp`) VALUES
+(000044, 'sach', 'ma-bun-luu-manh-mt.jpg', '', 55, 52, '2021-12-08', 000024, 19, 2, '55000', '2021-12-20 09:40:11');
+
 -- --------------------------------------------------------
 
 --
@@ -62,25 +69,27 @@ CREATE TABLE `books` (
 
 CREATE TABLE `categories` (
   `categoryid` int(2) UNSIGNED ZEROFILL NOT NULL,
-  `categoryname` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL
+  `categoryname` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `parent` int(11) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Đang đổ dữ liệu cho bảng `categories`
 --
 
-INSERT INTO `categories` (`categoryid`, `categoryname`) VALUES
-(19, 'Sách kinh tế - kỹ năng'),
-(20, 'Nghệ thuật sống - tâm lý'),
-(21, 'Sách văn học Việt Nam'),
-(22, 'Sách văn học nước ngoài'),
-(23, 'Sách thiếu nhi'),
-(24, 'Sách giáo dục - gia đình'),
-(25, 'Sách lịch sử'),
-(26, 'Sách văn hóa - nghệ thuật'),
-(27, 'Sách khoa học - triết học'),
-(28, 'Sách tâm linh, tôn giáo'),
-(29, 'Sách y học - thực dưỡng');
+INSERT INTO `categories` (`categoryid`, `categoryname`, `parent`) VALUES
+(19, 'Sách kinh tế - kỹ năng', 1),
+(20, 'Nghệ thuật sống - tâm lý', 1),
+(21, 'Sách văn học Việt Nam', 1),
+(22, 'Sách văn học nước ngoài', 1),
+(23, 'Sách thiếu nhi', 1),
+(24, 'Sách giáo dục - gia đình', 1),
+(25, 'Sách lịch sử', 1),
+(26, 'Sách văn hóa - nghệ thuật', 1),
+(27, 'Sách khoa học - triết học', 1),
+(28, 'Sách tâm linh, tôn giáo', 1),
+(29, 'Sách y học - thực dưỡng', 1),
+(34, 'Truyen tranh', 5);
 
 -- --------------------------------------------------------
 
@@ -99,6 +108,18 @@ CREATE TABLE `danhgia` (
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `nxb`
 --
 
@@ -112,7 +133,7 @@ CREATE TABLE `nxb` (
 --
 
 INSERT INTO `nxb` (`nxbid`, `nxb`) VALUES
-(000017, 'Nhà xuât bảng Thanh Niên'),
+(000017, 'Nhà xuất bảng Thanh Niên'),
 (000018, 'Nhà xuất bảng Văn hóa nghệ thuật'),
 (000019, 'Nhà xuất bản Tôn giáo'),
 (000020, 'Nhà xuất bản Kim Đồng'),
@@ -160,23 +181,26 @@ CREATE TABLE `ordersdetails` (
 CREATE TABLE `users` (
   `userid` int(6) UNSIGNED ZEROFILL NOT NULL,
   `password` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `username` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `isadmin` int(4) NOT NULL DEFAULT 0,
   `isdisable` int(4) NOT NULL DEFAULT 0,
   `fullname` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   `male` int(4) NOT NULL DEFAULT 1,
-  `address` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `dob` date NOT NULL
+  `address` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `dob` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`userid`, `password`, `username`, `isadmin`, `isdisable`, `fullname`, `phone`, `email`, `male`, `address`, `dob`) VALUES
-(000021, 'admin', 'admin', 1, 0, '', '', '', 1, '', '0000-00-00');
+INSERT INTO `users` (`userid`, `password`, `isadmin`, `isdisable`, `fullname`, `phone`, `email`, `male`, `address`, `dob`) VALUES
+(000021, 'admin', 1, 0, 'admin', '', 'admin@localhost', 1, '', '0000-00-00'),
+(000023, '$2y$10$Gj/0jSpjFEobcR1FJyvCAufuui29cMxP5Pan2P2KKgRsM9S0WHG4e', 0, 0, 'Quoc Tuan', '0125865325', 'tuanquocle054@gmail.com', 1, NULL, NULL),
+(000026, '$2y$10$A.3IfDhR3fXvrd7RFSNdxegui6QwvdnkfD9uylv2nXZHFz7s6wqyK', 0, 0, 'Quoc Tuan', '0254882681', 'tuanquocle@gmail.com', 1, NULL, NULL),
+(000028, '$2y$10$KIGzsTdXMXBLup25fAXK7e/e/mUm.UsgNAnvWucvgePbxXHdktk8G', 0, 0, 'Le Quoc Tuan', '0254882681', 'admin@gmail.com', 1, NULL, NULL),
+(000029, '$2y$10$S5.ckdp02sCWXVeDzC8dJ.deco5HGt9BemNrzgCOMh/NkNiuk.t7i', 0, 0, 'Viet', '0123456789', 'viet@gmail.com', 1, NULL, NULL);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -210,6 +234,12 @@ ALTER TABLE `danhgia`
   ADD KEY `bookid` (`bookid`);
 
 --
+-- Chỉ mục cho bảng `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `nxb`
 --
 ALTER TABLE `nxb`
@@ -233,7 +263,8 @@ ALTER TABLE `ordersdetails`
 -- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`userid`) USING BTREE;
+  ADD PRIMARY KEY (`userid`) USING BTREE,
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
@@ -249,19 +280,25 @@ ALTER TABLE `banner`
 -- AUTO_INCREMENT cho bảng `books`
 --
 ALTER TABLE `books`
-  MODIFY `bookid` int(6) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `bookid` int(6) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT cho bảng `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `categoryid` int(2) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `categoryid` int(2) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT cho bảng `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `nxb`
 --
 ALTER TABLE `nxb`
-  MODIFY `nxbid` int(6) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `nxbid` int(6) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT cho bảng `orders`
@@ -273,7 +310,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `userid` int(6) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `userid` int(6) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
