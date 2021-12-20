@@ -20,6 +20,9 @@ Route::get('/danh-muc-san-pham/{categoryid}', 'CategoryProduct@show_category_hom
 Route::get('/chi-tiet-san-pham/{bookid}', 'ProductController@details_product');
 
 
+Route::post('/dangky', 'HomeController@postDangKy');
+Route::post('/dangnhap', 'HomeController@postDangNhap');
+Route::get('/dangxuat', 'HomeController@getDangXuat');
 
 
 
@@ -29,6 +32,7 @@ Route::get('/chi-tiet-san-pham/{bookid}', 'ProductController@details_product');
 Route::get('/admin', 'AdminController@index');
 Route::get('/show_dashboard', 'AdminController@showDashBoard');
 Route::post('/admin_dashboard','AdminController@dashboard'); 
+Route::get('/logout', 'AdminController@logout');
 
 // admin category
 Route::get('/add_category', 'CategoryProduct@show_form_add_category');

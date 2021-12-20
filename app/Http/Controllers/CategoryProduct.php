@@ -48,11 +48,12 @@ class CategoryProduct extends Controller
         if($request->category_name) {
             $category = array();
             $category['categoryname'] = trim($request->category_name);
+            $category['parent'] = trim($request->category_pid);
             DB::table('categories')->insert($category);
             Session::put('message', 'Đã thêm thành công');
-            return Redirect::to('add_category');
+            return Redirect::to('all_category');
         }
-        // return view('admin.AddCategoryProduct');
+        return Redirect::to('add_category');
     }
 
     public function delete_category($id) {

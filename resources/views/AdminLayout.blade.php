@@ -234,13 +234,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                 <img alt="" src="images/2.png">
-                <span class="username">John Doe</span>
+                <span class="username">{{Session::get('admin_name')}}</span>
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout">
-                <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-                <li><a href="login.html"><i class="fa fa-key"></i> Log Out</a></li>
+                <li><a href="#"><i class=" fa fa-suitcase"></i>Hồ sơ</a></li>
+                <li><a href="#"><i class="fa fa-cog"></i> Cài đặt</a></li>
+                <li><a href="{{URL::to('/logout')}}"><i class="fa fa-key"></i> Đăng xuất</a></li>
             </ul>
         </li>
         <!-- user login dropdown end -->
@@ -277,11 +277,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-book"></i>
-                        <span>Danh sách NXB</span>
+                        <span>Quản lý NXB</span>
                     </a>
                     <ul class="sub"> 
                         <li><a href="{{URL::to('/add_nxb')}}">Thêm NXB</a></li> 
                         <li><a href="{{URL::to('/all_nxb')}}">Danh sách</a></li> 
+                    </ul>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-book"></i>
+                        <span>Quản lý tài khoản</span>
+                    </a>
+                    <ul class="sub"> 
+                        <!-- <li><a href="{{URL::to('/add_nxb')}}">Thêm NXB</a></li>  -->
+                        <li><a href="{{URL::to('/all_nxb')}}">Danh sách tài khoản</a></li> 
                     </ul>
                 </li>
                 
