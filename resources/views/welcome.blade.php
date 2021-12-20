@@ -68,7 +68,34 @@
                         </div>
                     </div>
                 </form>
+                @if(isset(Session::get('user')->userid))
+                <!-- ô đăng xuất khi đăng nhập thành công -->
+                <ul class="navbar-nav mb-1 ml-auto">
+                    <div class="dropdown">
+                        <li class="nav-item account" type="button" class="btn dropdown" data-toggle="dropdown">
+                            <a href="#" class="btn btn-secondary rounded-circle">
+                                <i class="fa fa-user"></i>
+                            </a>
+                            <a class="nav-link text-dark text-uppercase" href="#" style="display:inline-block">
+                                {{Session::get('user')->fullname}}
+                            </a>
+                        </li>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item nutdangky text-center mb-2" href="{{URL::to('/dangxuat')}}">Đăng xuất</a>
+                        </div>
+                    </div>
+                    <li class="nav-item giohang">
+                        <a href="gio-hang.html" class="btn btn-secondary rounded-circle">
+                            <i class="fa fa-shopping-cart"></i>
+                            <div class="cart-amount">0</div>
+                        </a>
+                        <a class="nav-link text-dark giohang text-uppercase" href="gio-hang.html"
+                            style="display:inline-block">Giỏ
+                            Hàng</a>
+                    </li>
+                </ul>
 
+                @else
                 <!-- ô đăng nhập đăng ký giỏ hàng trên header  -->
                 <ul class="navbar-nav mb-1 ml-auto">
                     <div class="dropdown">
@@ -96,6 +123,7 @@
                             Hàng</a>
                     </li>
                 </ul>
+                @endif
             </div>
         </div>
     </nav>
@@ -122,9 +150,15 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="form-signup" class="form-signin mt-2">
+                    <form 
+                        id="form-signup" 
+                        class="form-signin mt-2"
+                        method="POST"
+                        action="{{URL::to('/dangky')}}"
+                    >
+                    {{ csrf_field() }} 
                         <div class="form-label-group">
-                            <input type="text" class="form-control" placeholder="Nhập họ và tên" name="name" required
+                            <input type="text" class="form-control" placeholder="Nhập họ và tên" name="fullname" required
                                 autofocus>
                         </div>
                         <div class="form-label-group">
@@ -139,10 +173,10 @@
                             <input type="password" class="form-control" placeholder="Nhập mật khẩu" name="password"
                                 required>
                         </div>
-                        <div class="form-label-group mb-4">
+                        <!-- <div class="form-label-group mb-4">
                             <input type="password" class="form-control" name="confirm_password"
                                 placeholder="Nhập lại mật khẩu" required>
-                        </div>
+                        </div> -->
                         <button class="btn btn-lg btn-block btn-signin text-uppercase text-white mt-3" type="submit"
                             style="background: #F5A623">Đăng ký</button>
                         <hr class="mt-3 mb-2">
@@ -179,7 +213,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="form-signin" class="form-signin mt-2">
+                    <form 
+                        id="form-signin" 
+                        lass="form-signin mt-2"
+                        method="POST"
+                        action="{{URL::to('/dangnhap')}}"
+                    >
+                    {{ csrf_field() }} 
                         <div class="form-label-group">
                             <input type="email" class="form-control" placeholder="Nhập địa chỉ email" name="email"
                                 required autofocus>

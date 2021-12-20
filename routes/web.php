@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index');
 Route::get('/trang-chu', 'HomeController@index');
 Route::get('/danh-muc-san-pham/{categoryid}', 'CategoryProduct@show_category_home');
-
+Route::post('/dangky', 'HomeController@postDangKy');
+Route::post('/dangnhap', 'HomeController@postDangNhap');
+Route::get('/dangxuat', 'HomeController@getDangXuat');
 
 
 //admin
@@ -28,6 +30,7 @@ Route::get('/danh-muc-san-pham/{categoryid}', 'CategoryProduct@show_category_hom
 Route::get('/admin', 'AdminController@index');
 Route::get('/show_dashboard', 'AdminController@showDashBoard');
 Route::post('/admin_dashboard','AdminController@dashboard'); 
+Route::get('/logout', 'AdminController@logout');
 
 // admin category
 Route::get('/add_category', 'CategoryProduct@show_form_add_category');

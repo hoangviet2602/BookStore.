@@ -35,8 +35,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<input 
 				type="text" 
 				class="ggg" 
-				name="username" 
-				placeholder="Tài khoản" 
+				name="email" 
+				placeholder="Email" 
 				required=""
 				style="font-size: 1.6rem;">
 			<input 

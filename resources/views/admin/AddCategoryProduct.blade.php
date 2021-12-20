@@ -1,4 +1,3 @@
-ADDCATEGORY
 @extends('AdminLayout') 
 @section('admin_content') 
     <div class="row"> 

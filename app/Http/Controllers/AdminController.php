@@ -31,22 +31,25 @@ class AdminController extends Controller
 
     public function dashboard(Request $request) {
     
-        $admin_name =trim($request->username); 
+        $admin_email =trim($request->email); 
         $admin_password = trim($request->password); 
-
-// can sua bang
         $result = DB::table('users')
-            ->where('username',$admin_name)
+            ->where('email',$admin_email)
             ->where ('password',$admin_password)
             ->where('isadmin', 1)
             ->first(); 
         if($result){ 
-            Session::put('name',$result->username); 
-            Session::put('id',$result->userid);       
+            Session::put('id',$result->userid);
+            Session::put('admin_name', $result->fullname);       
             return view('admin.dashboard'); 
         }else{ 
             Session::put('message','mat khau hoac email khong dung, nhap lai nhe'); 
             return Redirect::to('/admin'); 
         }  
+    }
+
+    public function logout() {
+        Session::remove('id');
+        return  Redirect::to('/admin'); 
     }
 }
