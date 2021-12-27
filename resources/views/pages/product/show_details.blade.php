@@ -56,23 +56,27 @@
                                         <li>Bao sách miễn phí (theo yêu cầu)</li>
                                     </ul>
                                 </div>
+                            <form action="{{URL::to('/save-cart')}}" method="POST">
+                                {{csrf_field()}}
+                               
                                 <div class="soluong d-flex">
                                     <label class="font-weight-bold">Số lượng: </label>
                                     <div class="input-number input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text btn-spin btn-dec">-</span>
                                         </div>
-                                        <input type="number"   value="1" class="soluongsp  text-center" >
-                                        
+                                        <input type="number"   value="1" class="soluongsp  text-center" name ="qty" >
+                                        <input type="hidden"   value="{{$value->bookid}}"  name ="product_id_hidden" >
                                         <div class="input-group-append">
                                             <span class="input-group-text btn-spin btn-inc">+</span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="nutmua btn w-100 text-uppercase">Chọn mua</div>
-                                <a class="huongdanmuahang text-decoration-none" href="#">(Vui lòng xem hướng dẫn mua
-                                    hàng)</a>
-                                <small class="share">Share: </small>
+                                <button class="nutmua btn w-100 text-uppercase" type="submit">
+                                    <i> Chọn mua </i>
+                                </button>
+                            </form>
+                                
                                 <div class="fb-like" data-href="https://www.facebook.com/DealBook-110745443947730/"
                                     data-width="300px" data-layout="button" data-action="like" data-size="small"
                                     data-share="true"></div>

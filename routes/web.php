@@ -18,8 +18,10 @@ Route::get('/', 'HomeController@index');
 Route::get('/trang-chu', 'HomeController@index');
 Route::get('/danh-muc-san-pham/{categoryid}', 'CategoryProduct@show_category_home');
 Route::get('/chi-tiet-san-pham/{bookid}', 'ProductController@details_product');
-
-
+//cart
+Route::post('/save-cart', 'CartController@save_cart');
+Route::get('/show-cart', 'CartController@show_cart');
+//login
 Route::post('/dangky', 'HomeController@postDangKy');
 Route::post('/dangnhap', 'HomeController@postDangNhap');
 Route::get('/dangxuat', 'HomeController@getDangXuat');
