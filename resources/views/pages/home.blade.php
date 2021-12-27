@@ -1,6 +1,7 @@
 @extends('welcome')
 @section('content')
 
+
      <!-- noi dung danh muc sach(categories) + banner slider -->
      <section class="header bg-light">
         <div class="container">
