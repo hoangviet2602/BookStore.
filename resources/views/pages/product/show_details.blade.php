@@ -62,14 +62,14 @@
                                 <div class="soluong d-flex">
                                     <label class="font-weight-bold">Số lượng: </label>
                                     <div class="input-number input-group mb-3">
-                                        <div class="input-group-prepend">
+                                       <!-- <div class="input-group-prepend">
                                             <span class="input-group-text btn-spin btn-dec">-</span>
-                                        </div>
-                                        <input type="number"   value="1" class="soluongsp  text-center" name ="qty" >
+                                        </div> -->
+                                        <input type="number"  min ="1" value="1" class="soluongsp  text-center" name ="qty" >
                                         <input type="hidden"   value="{{$value->bookid}}"  name ="product_id_hidden" >
-                                        <div class="input-group-append">
+                                        <!--<div class="input-group-append">
                                             <span class="input-group-text btn-spin btn-inc">+</span>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                                 <button class="nutmua btn w-100 text-uppercase" type="submit">

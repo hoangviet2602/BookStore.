@@ -92,13 +92,22 @@
                         </div>
                     </div>
                     <li class="nav-item giohang">
-                        <a href="gio-hang.html" class="btn btn-secondary rounded-circle">
+                        <a href="{{URL::to('/show-cart')}}" class="btn btn-secondary rounded-circle">
                             <i class="fa fa-shopping-cart"></i>
-                            <div class="cart-amount">0</div>
+                           
+                            <div style="height: 18px;
+                                width: 18px;
+                                border-radius: 50%;
+                                background: #F5A623;
+                                font-size: 12px;
+                                position: relative;
+                                left: 19px;
+                                bottom: 32px;
+                                transition: 0.2s;">{{Cart::count()}}</div>
+                           
                         </a>
-                        <a class="nav-link text-dark giohang text-uppercase" href="gio-hang.html"
-                            style="display:inline-block">Giỏ
-                            Hàng</a>
+                        <a class="nav-link text-dark giohang text-uppercase" href="{{URL::to('/show-cart')}}"
+                            style="display:inline-block">Giỏ Hàng</a>
                     </li>
                 </ul>
 
@@ -120,14 +129,24 @@
                                 data-target="#formdangnhap">Đăng nhập</a>
                         </div>
                     </div>
+                   
                     <li class="nav-item giohang">
-                        <a href="gio-hang.html" class="btn btn-secondary rounded-circle">
+                        <a href="{{URL::to('/show-cart')}}" class="btn btn-secondary rounded-circle">
                             <i class="fa fa-shopping-cart"></i>
-                            <div class="cart-amount">0</div>
+                           
+                            <div style="height: 18px;
+                                width: 18px;
+                                border-radius: 50%;
+                                background: #F5A623;
+                                font-size: 12px;
+                                position: relative;
+                                left: 19px;
+                                bottom: 32px;
+                                transition: 0.2s;">{{Cart::count()}}</div>
+                           
                         </a>
-                        <a class="nav-link text-dark giohang text-uppercase" href="gio-hang.html"
-                            style="display:inline-block">Giỏ
-                            Hàng</a>
+                        <a class="nav-link text-dark giohang text-uppercase" href="{{URL::to('/show-cart')}}"
+                            style="display:inline-block">Giỏ Hàng</a>
                     </li>
                 </ul>
                 @endif

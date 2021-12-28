@@ -21,6 +21,14 @@ Route::get('/chi-tiet-san-pham/{bookid}', 'ProductController@details_product');
 //cart
 Route::post('/save-cart', 'CartController@save_cart');
 Route::get('/show-cart', 'CartController@show_cart');
+Route::get('/delete-to-cart/{rowId}', 'CartController@delete_to_cart');
+Route::post('/update-cart-quantity', 'CartController@update_cart_quantity');
+Route::post('/login-cart', 'CartController@login_cart');
+Route::post('/signin-cart', 'CartController@signin_cart');
+
+//checkout
+Route::post('//payment', 'CheckoutController@payment');
+
 
 //login
 Route::post('/dangky', 'HomeController@postDangKy');

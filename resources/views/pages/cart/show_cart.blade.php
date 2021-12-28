@@ -1,6 +1,9 @@
-@extends('welcome2')
+@extends('welcome')
 @section('content')
-
+<?php
+     use Gloudemans\Shoppingcart\Facades\Cart;
+    $content =   Cart::content();
+?>
 
 <link rel="stylesheet" href="{{asset('public/frontend/css/gio-hang.css')}}">
 <!-- giao diện giỏ hàng  -->
@@ -8,23 +11,21 @@
         <div class="container">
             <div class="cart-page bg-white">
                 <div class="row">
-                    <!-- giao diện giỏ hàng khi không có item  
+                    @if(Cart::count() == 0)
+                    <!-- giao diện giỏ hàng khi không có item   -->
                     <div class="col-12 cart-empty d-none">
                         <div class="py-3 pl-3">
                             <h6 class="header-gio-hang">GIỎ HÀNG CỦA BẠN <span>(0 sản phẩm)</span></h6>
                             <div class="cart-empty-content w-100 text-center justify-content-center">
-                                <img src="" alt="shopping-cart-not-product">
+                                <img src="{{asset('public/frontend/images/no_items_found.jpg')}}" alt="shopping-cart-not-product" width="200px">
                                 <p>Chưa có sản phẩm nào trong giở hàng của bạn</p>
                                 <a href="{{URL::to('/trang-chu')}}" class="btn nutmuathem mb-3">Mua thêm</a>
                             </div>
                         </div>
-                    </div> -->
-
+                    </div>
+                    @endif
                     <!-- giao diện giỏ hàng khi có hàng (phần comment màu xanh bên dưới là phần 2 sản phẩm trong giỏ hàng nhưng giờ đã demo bằng jquery) -->
-                  <?php
-                        use Gloudemans\Shoppingcart\Facades\Cart;
-                        $content =   Cart::content();
-                  ?>
+                  
                     
                     <div class="col-md-8 cart">
                         <div class="cart-content py-3 pl-3">
@@ -38,9 +39,11 @@
                                         </div>
                                         <br>
                                         <hr>
-                             @foreach($content as $v_content)
+                             
                             <div class="cart-list-items">
+                            @foreach($content as $v_content)
                                 <div class="cart-item d-flex">
+                                
                                     <a href="product-item.html" class="img">
                                         <img src="{{URL::to('public/frontend/images/'.$v_content->options->image)}}" class="img-fluid" alt="anhsp1">
                                     </a>
@@ -48,16 +51,21 @@
                                         <div class="item-info ml-3">
                                             <a href="product-item.html" class="ten">{{$v_content->name}}</a>
                                             <div class="soluong d-flex">
-                                                <div class="input-number input-group mb-3">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text btn-spin btn-dec">-</span>
-                                                    </div>
-                                                    <input type="text" value="{{$v_content->qty}}" class="soluongsp  text-center">
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text btn-spin btn-inc">+</span>
-                                                    </div>
-                                                    
+
+                                            <form action="{{URL::to('/update-cart-quantity')}}" method="POST">
+                                                {{csrf_field()}}
+                                                <div class="input-number input-group mb-3">      
+                                                    <input type="number"  min ="1" value="{{$v_content->qty}}" class="soluongsp  text-center" name ="cart_quantity" style="width:28px;height:25px" >                  
                                                 </div>
+                                                
+                                                    
+                                                <div class="input-group-append">
+                                                <input type="hidden"   value="{{$v_content->rowId}}"  name ="rowid"  >
+                                                        <input class="input-group-text btn-spin btn-inc" value="Cập nhật" 
+                                                        style="width:75px;height:25px;margin-top:-36px;margin-left:40px"  type="submit" name="update_qty">
+                                                </div>
+                                            </form>    
+
                                             </div>
                                         </div>
                                         
@@ -69,13 +77,18 @@
                                                 ?>
                                                 đ
                                             </div>
-                                            <span class="remove mt-auto"><i class="far fa-trash-alt"></i></span>
+                                            <span class="remove mt-auto" >
+                                                <a href="{{URL::to('/delete-to-cart/'.$v_content->rowId)}}"><i class="far fa-trash-alt" ></i></a>
+                                            </span>
                                         </div>
                                     </div>
+                                   
                                 </div>
-</br>
+                                </br>
                                 <hr>
-                                @endforeach
+                                @endforeach 
+
+                                
                             </div> 
                              <div class="row">
                                 <div class="col-md-3">
@@ -112,20 +125,158 @@
                         </div>
                     </div>
                   
-                    <!-- giao diện phần thanh toán nằm bên phải  -->
-                    
-                            
+                    <div class="col-md-4 cart-steps pl-0">
+                        <div id="cart-steps-accordion" role="tablist" aria-multiselectable="true">
+                        @if(isset(Session::get('user')->userid))
+
                             <!-- bước số 2: nhập địa chỉ giao hàng  -->
-                            
-                                
-                                <!-- bước 3: thanh toán đặt mua  -->
-                               
+                            <div class="card">
+                                <div class="card-header" role="tab" id="step2header">
+                                    <h5 class="mb-0">
+                                        <a data-toggle="collapse" data-parent="#cart-steps-accordion"
+                                            href="#step2contentid" aria-expanded="true" aria-controls="step2contentid"
+                                            class="text-uppercase header"><span class="steps">ĐẶT HÀNG</span>
+                                            <span class="label">Thông tin khách hàng</span>
+                                            <i class="fa fa-chevron-right float-right"></i>
+                                        </a>
+                                    </h5>
+                                </div>
+                                <div id="step2contentid" class="collapse in" role="tabpanel"
+                                    aria-labelledby="step2header" class="stepscontent">
+                                    <div class="card-body">
+                                        <form class="form-diachigiaohang" method="POST" action="{{URL::to('/payment')}}">
+                                            {{csrf_field()}}
+                                            <div class="form-label-group">
+                                                <input type="text" id="inputName" class="form-control"
+                                                    placeholder="Nhập họ và tên" name="name" required autofocus>
+                                            </div>
+                                            <div class="form-label-group">
+                                                <input type="text" id="inputPhone" class="form-control"
+                                                    placeholder="Nhập số điện thoại" name="phone" required>
+                                            </div>
+                                            
+                                            <div class="form-label-group">
+                                                <input type="text" id="inputAddress" class="form-control"
+                                                    placeholder="Nhập Địa chỉ giao hàng" name="address" required>
+                                            </div>
+                                            
+                                            <div class="form-label-group">
+                                                <textarea type="text" id="inputNote" class="form-control"
+                                                    placeholder="Nhập ghi chú (Nếu có)" name="note"></textarea>
+                                            </div>
+                                        
+                                            <button class="btn btn-lg btn-block btn-checkout text-uppercase text-white"
+                                                style="background: #F5A623">Đặt mua</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            @else    
+                            <div class="card">
+                                <div class="card-header cardheader" role="tab" id="step1header">
+                                    <h5 class="mb-0">
+                                        <a data-toggle="collapse" data-parent="#cart-steps-accordion"
+                                            href="#step1contentid" aria-expanded="true" aria-controls="step1contentid"
+                                            class="text-uppercase header"><span class="steps">1</span>
+                                            <span class="label">VUI LÒNG ĐĂNG NHẬP ĐỂ MUA HÀNG</span>
+                                            <i class="fa fa-chevron-right float-right"></i>
+                                        </a>
+                                    </h5>
+                                </div>
+                                <div id="step1contentid" class="collapse in" role="tabpanel"
+                                    aria-labelledby="step1header" class="stepscontent">
+                                    <div class="card-body p-0">
+                                        <nav>
+                                            <div class="nav nav-tabs dangnhap-dangky" id="nav-tab" role="tablist">
+                                                <a class="nav-item nav-link active text-center text-uppercase"
+                                                    id="nav-dangnhap-tab" data-toggle="tab" href="#nav-dangnhap"
+                                                    role="tab" aria-controls="nav-dangnhap" aria-selected="true">Đăng
+                                                    nhập</a>
+                                                <a class="nav-item nav-link text-center text-uppercase"
+                                                    id="nav-dangky-tab" data-toggle="tab" href="#nav-dangky" role="tab"
+                                                    aria-controls="nav-dangky" aria-selected="false">Đăng ký</a>
+                                            </div>
+                                        </nav>
+                                        <div class="tab-content" id="nav-tabContent">
+                                            <div class="tab-pane fade show active" id="nav-dangnhap" role="tabpanel"
+                                                aria-labelledby="nav-dangnhap-tab">
+                                                <!-- Xử lí đăng nhập -->
+                                                <form id="form-signin-cart" class="form-signin mt-2" 
+                                                        method="POST" action="{{URL::to('/login-cart')}}" >
+                                                        {{ csrf_field() }}
+                                                    <div class="form-label-group">
+                                                        <input type="email" id="inputEmail" class="form-control"
+                                                            placeholder="Nhập địa chỉ email" name="email" required
+                                                            autofocus>
+                                                    </div>
+                                                    <div class="form-label-group">
+                                                        <input type="password" id="inputPassword" class="form-control"
+                                                            placeholder="Mật khẩu" name="password" required>
+                                                    </div>
+                                                    <div class="custom-control custom-checkbox mb-3">
+                                                        <a href="#" class="float-right text-decoration-none"
+                                                            style="color: #F5A623">Quên mật khẩu</a>
+                                                    </div>
+                                                    <button
+                                                        class="btn btn-lg btn-block btn-signin text-uppercase text-white"
+                                                        type="submit" style="background: #F5A623">Đăng nhập</button>
+
+                                                    
+                                                    <button class="btn btn-lg btn-google btn-block text-uppercase"
+                                                        type="submit"><i class="fab fa-google mr-2"></i> Đăng nhập bằng
+                                                        Google</button>
+                                                    <button class="btn btn-lg btn-facebook btn-block text-uppercase"
+                                                        type="submit"><i class="fab fa-facebook-f mr-2"></i> Đăng nhập
+                                                        bằng Facebook</button>
+                                                </form>
+                                                
+                                            </div>
+                                            <div class="tab-pane fade" id="nav-dangky" role="tabpanel"
+                                                aria-labelledby="nav-dangky-tab">
+                                                        <!-- đăng kí -->
+                                                <form id="form-signup-cart" class="form-signin mt-2" 
+                                                    method="POST" action="{{URL::to('/signin-cart')}}" >
+                                                    {{ csrf_field() }}
+                                                    <div class="form-label-group">
+                                                        <input type="text" id="inputName" class="form-control"
+                                                            placeholder="Nhập họ và tên" name="fullname" required autofocus>
+                                                    </div>
+                                                    <div class="form-label-group">
+                                                        <input type="text" id="inputPhone" class="form-control"
+                                                            placeholder="Nhập số điện thoại" name="phone" required>
+                                                    </div>
+                                                    <div class="form-label-group">
+                                                        <input type="email" id="inputEmail" class="form-control"
+                                                            placeholder="Nhập địa chỉ email" name="email" required>
+                                                    </div>
+
+                                                    <div class="form-label-group">
+                                                        <input type="password" id="inputPassword" class="form-control"
+                                                            placeholder="Nhập mật khẩu" name="password" required>
+                                                    </div>
+                                                    <!-- <div class="form-label-group mb-3">
+                                                        <input type="password" id="inputConfirmPassword"
+                                                            class="form-control" name="confirm_password"
+                                                            placeholder="Nhập lại mật khẩu" required>
+                                                    </div> -->
+                                                   
+                                                    
+                                                    <button
+                                                        class="btn btn-lg btn-block btn-signin text-uppercase text-white mt-3"
+                                                        type="submit" style="background: #F5A623">Đăng ký</button>
+
+                                                </form>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif    
 
                             </div>
                             
                         </div>
                     </div>
-                    <!-- het div cart-steps  -->
                 </div>
                 <!-- het row  -->
             </div>
