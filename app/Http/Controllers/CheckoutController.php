@@ -39,7 +39,7 @@ class CheckoutController extends Controller
             Db::table('ordersdetails')->insert($data);
         }
         Cart::destroy();
-        return view('pages.cart.show_cart');
+        return view('pages.cart.checkout_complete');
 
     }
 }

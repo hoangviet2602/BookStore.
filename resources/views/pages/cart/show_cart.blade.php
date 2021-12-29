@@ -11,11 +11,12 @@
         <div class="container">
             <div class="cart-page bg-white">
                 <div class="row">
+                    
                     @if(Cart::count() == 0)
                     <!-- giao diện giỏ hàng khi không có item   -->
-                    <div class="col-12 cart-empty d-none">
+                    <div class="col-md-8 cart" style="margin-left:170px">
                         <div class="py-3 pl-3">
-                            <h6 class="header-gio-hang">GIỎ HÀNG CỦA BẠN <span>(0 sản phẩm)</span></h6>
+                            <h6 class="header-gio-hang" style="margin-left:-170px">GIỎ HÀNG CỦA BẠN <span>(0 sản phẩm)</span></h6>
                             <div class="cart-empty-content w-100 text-center justify-content-center">
                                 <img src="{{asset('public/frontend/images/no_items_found.jpg')}}" alt="shopping-cart-not-product" width="200px">
                                 <p>Chưa có sản phẩm nào trong giở hàng của bạn</p>
@@ -23,14 +24,13 @@
                             </div>
                         </div>
                     </div>
-                    @endif
-                    <!-- giao diện giỏ hàng khi có hàng (phần comment màu xanh bên dưới là phần 2 sản phẩm trong giỏ hàng nhưng giờ đã demo bằng jquery) -->
-                  
+                    @else
+                    <!-- giao diện giỏ hàng khi có hàng  -->
                     
                     <div class="col-md-8 cart">
                         <div class="cart-content py-3 pl-3">
-                             <h6 class="header-gio-hang">GIỎ HÀNG CỦA BẠN <span>(1 sản phẩm) </span></h6>
-</br>
+                             <h6 class="header-gio-hang">GIỎ HÀNG CỦA BẠN <span>({{Cart::count()}} sản phẩm) </span></h6>
+                                </br>
                              <hr>
                              <div class="group d-flex justify-content-between">
                                             <p class="label">Sản phẩm</p>
@@ -70,12 +70,11 @@
                                         </div>
                                         
                                         <div class="item-price ml-auto d-flex flex-column align-items-end">
-                                        <div class="giamoi" style="margin-right:150px">Giá: {{number_format($v_content->price) }} đ</div>
+                                        <div class="giamoi" style="margin-right:150px"> {{number_format($v_content->price) }} đ</div>
                                             <div class="giamoi"  style="margin-top:-20px">
                                                 <?php  $subtotal = $v_content->price * $v_content->qty;
                                                     echo number_format($subtotal) ;
-                                                ?>
-                                                đ
+                                                ?>đ
                                             </div>
                                             <span class="remove mt-auto" >
                                                 <a href="{{URL::to('/delete-to-cart/'.$v_content->rowId)}}"><i class="far fa-trash-alt" ></i></a>
@@ -86,10 +85,11 @@
                                 </div>
                                 </br>
                                 <hr>
-                                @endforeach 
+                            @endforeach 
 
                                 
                             </div> 
+                            
                              <div class="row">
                                 <div class="col-md-3">
                                     <a href="{{URL::to('/trang-chu')}}" class="btn nutmuathem mb-3">Mua thêm</a>
@@ -124,10 +124,11 @@
                             </div> 
                         </div>
                     </div>
-                  
+                   
                     <div class="col-md-4 cart-steps pl-0">
                         <div id="cart-steps-accordion" role="tablist" aria-multiselectable="true">
-                        @if(isset(Session::get('user')->userid))
+                        <!-- @if(Cart::count()>0) -->
+                        @if(isset(Session::get('user')->userid )&& Cart::count()>0)
 
                             <!-- bước số 2: nhập địa chỉ giao hàng  -->
                             <div class="card">
@@ -144,7 +145,7 @@
                                 <div id="step2contentid" class="collapse in" role="tabpanel"
                                     aria-labelledby="step2header" class="stepscontent">
                                     <div class="card-body">
-                                        <form class="form-diachigiaohang" method="POST" action="{{URL::to('/payment')}}">
+                                        <form id="form-checkout" class="form-diachigiaohang" method="POST" action="{{URL::to('/payment')}}">
                                             {{csrf_field()}}
                                             <div class="form-label-group">
                                                 <input type="text" id="inputName" class="form-control"
@@ -162,15 +163,15 @@
                                             
                                             <div class="form-label-group">
                                                 <textarea type="text" id="inputNote" class="form-control"
-                                                    placeholder="Nhập ghi chú (Nếu có)" name="note"></textarea>
+                                                    placeholder="Nhập ghi chú (Nếu có)" name="note" ></textarea>
                                             </div>
                                         
-                                            <button class="btn btn-lg btn-block btn-checkout text-uppercase text-white"
+                                            <button class="btn btn-lg btn-block btn-signin text-uppercase text-white" type="submit"
                                                 style="background: #F5A623">Đặt mua</button>
                                         </form>
                                     </div>
                                 </div>
-                            @else    
+                        @else    
                             <div class="card">
                                 <div class="card-header cardheader" role="tab" id="step1header">
                                     <h5 class="mb-0">
@@ -271,13 +272,14 @@
                                     </div>
                                 </div>
                             </div>
-                            @endif    
-
-                            </div>
-                            
+                        @endif   
+                        <!-- @endif  -->
+                            </div>    
                         </div>
                     </div>
+                  
                 </div>
+                @endif   
                 <!-- het row  -->
             </div>
             <!-- het cart-page  -->

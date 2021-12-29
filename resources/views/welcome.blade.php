@@ -241,7 +241,7 @@
                 <div class="modal-body">
                     <form 
                         id="form-signin" 
-                        lass="form-signin mt-2"
+                        class="form-signin mt-2"
                         method="POST"
                         action="{{URL::to('/dangnhap')}}"
                     >

@@ -27,7 +27,7 @@ Route::post('/login-cart', 'CartController@login_cart');
 Route::post('/signin-cart', 'CartController@signin_cart');
 
 //checkout
-Route::post('//payment', 'CheckoutController@payment');
+Route::post('/payment', 'CheckoutController@payment');
 
 
 //login
