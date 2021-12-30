@@ -261,12 +261,6 @@
                 <div class="modal-body">
                     <form 
                         id="form-signin" 
-<<<<<<< HEAD
-                        class="form-signin mt-2"
-                        method="POST"
-                        action="{{URL::to('/dangnhap')}}"
-=======
->>>>>>> tuan/authentication
                     >
                     {{ csrf_field() }} 
                         <div class="form-group">
