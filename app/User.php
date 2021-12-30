@@ -30,21 +30,41 @@ class User extends Authenticatable
     protected static function create($user) {
         DB::table('users')->insert($user);
     }
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    // protected $hidden = [
-    //     'password', 'remember_token',
-    // ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    // protected $casts = [
-    //     'email_verified_at' => 'datetime',
-    // ];
+    protected static function find() {
+
+    }
+
+    protected static function remove($userid) {
+        DB::table('users')->where('userid', $userid)->delete();
+    }
+
+    protected static function get_all() {
+        return DB::table('users')->get();
+    }
+
+    protected static function enable_admin($userid) {
+        $user = array();
+        $user['isadmin'] = 1;
+        DB::table('users')->where('userid', $userid)->update($user);
+    }
+
+    protected static function disable_admin($userid) {
+        $user = array();
+        $user['isadmin'] = 0;
+        DB::table('users')->where('userid', $userid)->update($user);
+    }
+
+    protected static function disable_user($userid) {
+        $user = array();
+        $user['isdisable'] = 1;
+        DB::table('users')->where('userid', $userid)->update($user);
+    }
+
+    protected static function enable_user($userid) {
+        $user = array();
+        $user['isdisable'] = 0;
+        DB::table('users')->where('userid', $userid)->update($user);
+    }
+
 }

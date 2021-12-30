@@ -8,6 +8,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <head>
 <title>Document</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Visitors Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
@@ -292,7 +293,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </a>
                     <ul class="sub"> 
                         <!-- <li><a href="{{URL::to('/add_nxb')}}">Thêm NXB</a></li>  -->
-                        <li><a href="{{URL::to('/all_nxb')}}">Danh sách tài khoản</a></li> 
+                        <li><a href="{{URL::to('/all_users')}}">Danh sách tài khoản</a></li> 
                     </ul>
                 </li>
                 
@@ -319,7 +320,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--main content end-->
 </section>
 <script src="{{asset('public/backend/js/bootstrap.js')}}"></script>
-<script src="{{asset('public/backend/js/jquery.dcjqaccordion.2.7.js')}}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
 <script src="{{asset('public/backend/js/scripts.js')}}"></script>
 <script src="{{asset('public/backend/js/jquery.slimscroll.js')}}"></script>
 <script src="{{asset('public/backend/js/jquery.nicescroll.js')}}"></script>

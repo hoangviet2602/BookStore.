@@ -8,8 +8,11 @@
     <meta name="keywords" content="nhà sách online, mua sách hay, sách hot, sách bán chạy, sách giảm giá nhiều">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
 
@@ -37,7 +40,14 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{asset('public/frontend/favicon_io/favicon-32x32.png')}}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('public/frontend/favicon_io/favicon-16x16.png')}}">
     <link rel="manifest" href="{{asset('public/frontend/favicon_io/site.webmanifest')}}">
-    <style>img[alt="www.000webhost.com"]{display: none;}</style>
+    <style>
+        img[alt="www.000webhost.com"]{display: none;}
+
+        .form-message {
+            font-size: .8rem;
+            color: red;
+        }
+    </style>
 
  
     
@@ -179,33 +189,42 @@
                 <div class="modal-body">
                     <form 
                         id="form-signup" 
-                        class="form-signin mt-2"
-                        method="POST"
-                        action="{{URL::to('/dangky')}}"
                     >
                     {{ csrf_field() }} 
-                        <div class="form-label-group">
-                            <input type="text" class="form-control" placeholder="Nhập họ và tên" name="fullname" required
-                                autofocus>
-                        </div>
-                        <div class="form-label-group">
-                            <input type="text" class="form-control" placeholder="Nhập số điện thoại" name="phone"
-                                required>
-                        </div>
-                        <div class="form-label-group">
-                            <input type="email" class="form-control" placeholder="Nhập địa chỉ email" name="email"
-                                required>
-                        </div>
-                        <div class="form-label-group">
-                            <input type="password" class="form-control" placeholder="Nhập mật khẩu" name="password"
-                                required>
-                        </div>
+                    <div class="form-group">
+                        <label for="res-fullname" class="form-label">Tài khoản</label>
+                        <input type="text" autocomplete="off" class="form-control" id="res-fullname" name="res-fullname">
+                        <p class="form-message"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="res-phone" class="form-label">Số điện thoại</label>
+                        <input type="text" autocomplete="off" class="form-control" id="res-phone" name="res-phone">
+                        <p class="form-message"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="res-email" class="form-label">Email</label>
+                        <input type="text" autocomplete="off" class="form-control" id="res-email" name="res-email">
+                        <p class="form-message"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="res-password" class="form-label">Mật khẩu</label>
+                        <input type="password" autocomplete="off" class="form-control" id="res-password" name="res-password">
+                        <p class="form-message"></p>
+                    </div>
                         <!-- <div class="form-label-group mb-4">
                             <input type="password" class="form-control" name="confirm_password"
                                 placeholder="Nhập lại mật khẩu" required>
                         </div> -->
-                        <button class="btn btn-lg btn-block btn-signin text-uppercase text-white mt-3" type="submit"
-                            style="background: #F5A623">Đăng ký</button>
+                        <button 
+                            class="btn btn-lg btn-block btn-signin text-uppercase text-white mt-3" 
+                            type="submit"
+                            style="background: #F5A623"
+                            id="btn-register"
+                            >Đăng ký
+                        </button>
                         <hr class="mt-3 mb-2">
                         <div class="custom-control custom-checkbox">
                             <p class="text-center">Bằng việc đăng ký, bạn đã đồng ý với DealBook về</p>
@@ -242,24 +261,30 @@
                 <div class="modal-body">
                     <form 
                         id="form-signin" 
+<<<<<<< HEAD
                         class="form-signin mt-2"
                         method="POST"
                         action="{{URL::to('/dangnhap')}}"
+=======
+>>>>>>> tuan/authentication
                     >
                     {{ csrf_field() }} 
-                        <div class="form-label-group">
-                            <input type="email" class="form-control" placeholder="Nhập địa chỉ email" name="email"
-                                required autofocus>
+                        <div class="form-group">
+                            <label for="login-email" class="form-label">Email</label>
+                            <input type="text" autocomplete="off" class="form-control" id="login-email" name="login-email">
+                            <p class="form-message"></p>
                         </div>
 
-                        <div class="form-label-group">
-                            <input type="password" class="form-control" placeholder="Mật khẩu" name="password" required>
+                        <div class="form-group">
+                            <label for="login-password" class="form-label">Mật khẩu</label>
+                            <input type="password" autocomplete="off" class="form-control" id="login-password" name="login-password">
+                            <p class="form-message"></p>
                         </div>
 
                         <div class="custom-control custom-checkbox mb-3">
                             <input type="checkbox" class="custom-control-input" id="customCheck1">
-                            <label class="custom-control-label" for="customCheck1">Nhớ mật khẩu</label>
-                            <a href="#" class="float-right text-decoration-none" style="color: #F5A623">Quên mật
+                            <label class="custom-control-label"  for="customCheck1">Nhớ mật khẩu</label>
+                            <a href="#" class="float-right text-decoration-none" id="forgot"  style="color: #F5A623">Quên mật
                                 khẩu</a>
                         </div>
 
@@ -378,7 +403,82 @@
         <div class="btn btn-warning float-right rounded-circle nutcuonlen" id="backtotop" href="#"
             style="background:#CF111A;"><i class="fa fa-chevron-up text-white"></i></div>
     </div>
+    <script src="{{asset('public/frontend/js/validator.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+    <script>
+        Validator({
+            form: '#form-signup',
+            formGroup: '.form-group',
+            message: '.form-message',
+            rules: [
+                Validator.isRequire('#res-fullname'),
+                Validator.isRequire('#res-phone'),
+                Validator.isEmail('#res-email'),
+                Validator.isPassword('#res-password'),
+                // Validator.isConfirm('#res-email', function() {
+                //     return document.querySelector('#form-1 #password').value;
+                // }, 'Nhập lại mật khẩu chưa đúng')
+            ],
+                onSubmit: function(data) {
+                    let userName = $('#res-fullname').val()
+            let userEmail = $('#res-email').val()
+            let userPhone = $('#res-phone').val()
+            let userPassword = $('#res-password').val()
+            $.ajax({
+                url: "{{url('/dangky')}}",
+                method: 'post',
+                data: 
+                {
+                    fullname: userName,
+                    email: userEmail,
+                    phone: userPhone,
+                    password: userPassword
 
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(data) {
+                    if(data == 'fail')
+                        $.notify(`Đăng ký thất bại`, 'error')
+                    if(data == 'success')
+                        $.notify(`Đăng ký thành công`, 'success')
+                        window.location.replace("{{url('/')}}");
+                }
+            })
+                }
+        });
+        // $('#form-signup').submit(function(e) {
+        //     e.preventDefault();
+           
+        // })
+
+        $('#form-signin').submit(function(e) {
+            e.preventDefault();
+            let userEmail = $('#login-email').val()
+            let userPassword = $('#login-password').val()
+            $.ajax({
+                url: "{{url('/dangnhap')}}",
+                method: 'post',
+                data: 
+                {
+                    email: userEmail,
+                    password: userPassword
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(data) {
+                    if(data == 'fail')
+                        $.notify(`Đăng nhập thất bại`, 'error')
+                    if(data == 'success') {
+                        $.notify(`Đăng nhập thành công`, 'success')
+                        window.location.replace("{{url('/')}}");
+                    }
+                }
+            })
+        })
+    </script>
 </body>
 
 </html>

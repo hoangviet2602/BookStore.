@@ -41,8 +41,11 @@ class HomeController extends Controller
         }   
         if(Auth::attempt(['email'=>$request -> email, 'password'=>$request -> password])) {
             Session::put('user', Auth::user());
-        }  
-        return Redirect::to('/'); 
+            echo 'success';
+        }  else{
+            echo 'fail';
+        }
+        
     }
 
     public function postDangNhap(Request $request) {
@@ -50,8 +53,9 @@ class HomeController extends Controller
         $password = $request -> password;
         if(Auth::attempt(['email'=>$email, 'password'=>$password])) {
             Session::put('user', Auth::user());
-        } 
-        return Redirect::to('/'); 
+            echo 'success';
+        } else 
+            echo 'fail';
     }
 
     public function getDangXuat(Request $request) {
