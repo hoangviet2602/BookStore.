@@ -1,5 +1,48 @@
 @extends('welcome')
 @section('content')
+
+<section class="duoinavbar">
+        <div class="container text-white">
+            <div class="row justify">
+                <div class="col-lg-3 col-md-5">
+                    <div class="categoryheader">
+                        <div class="noidungheader text-white">
+                            <i class="fa fa-bars"></i>
+                            <span class="text-uppercase font-weight-bold ml-1">Danh mục sách</span>
+                        </div>
+                        <!-- CATEGORIES -->
+                        <div class="categorycontent">
+                        <ul >
+                            @foreach($category as $key => $cate)
+                            <li> <a href="{{URL::to('/danh-muc-san-pham/'.$cate->categoryid)}}">{{$cate->categoryname}}</a><i class="fa fa-chevron-right float-right"></i>
+                              <ul>
+                                    <li class="liheader"><a href="#" class="header text-uppercase">{{$cate->categoryname}}</a></li>
+                                @foreach($sub_cate as $key => $sub)    
+                                    @if($sub->parent == $cate->categoryid)                
+                                        <li style="margin-left:50px"><a href="{{URL::to('/danh-muc-san-pham/'.$sub->categoryid)}}">{{$sub->categoryname}}</a></li>
+                                    @endif
+                                @endforeach    
+                                </ul>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-md-5 ml-auto contact d-none d-md-block">
+                    <div class="benphai float-right">
+                        <div class="hotline">
+                            <i class="fa fa-phone"></i>
+                            <span>Hotline:<b>1900 1999</b> </span>
+                        </div>
+                        <i class="fas fa-comments-dollar"></i>
+                        <a href="#">Hỗ trợ trực tuyến </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 <?php
      use Gloudemans\Shoppingcart\Facades\Cart;
     $content =   Cart::content();
@@ -44,12 +87,12 @@
                             @foreach($content as $v_content)
                                 <div class="cart-item d-flex">
                                 
-                                    <a href="product-item.html" class="img">
+                                    <a href="{{URL::to('/chi-tiet-san-pham/'.$v_content->id)}}" class="img">
                                         <img src="{{URL::to('public/frontend/images/'.$v_content->options->image)}}" class="img-fluid" alt="anhsp1">
                                     </a>
                                     <div class="item-caption d-flex w-100">
                                         <div class="item-info ml-3">
-                                            <a href="product-item.html" class="ten">{{$v_content->name}}</a>
+                                            <a href="{{URL::to('/chi-tiet-san-pham/'.$v_content->id)}}" class="ten">{{$v_content->name}}</a>
                                             <div class="soluong d-flex">
 
                                             <form action="{{URL::to('/update-cart-quantity')}}" method="POST">

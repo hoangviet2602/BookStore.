@@ -4,6 +4,52 @@
     <link rel="stylesheet" href="{{asset('public/frontend/css/product-item.css')}}">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+
+ <!-- thanh "danh muc sach" đã được ẩn bên trong + hotline + ho tro truc tuyen -->
+ <section class="duoinavbar">
+        <div class="container text-white">
+            <div class="row justify">
+                <div class="col-lg-3 col-md-5">
+                    <div class="categoryheader">
+                        <div class="noidungheader text-white">
+                            <i class="fa fa-bars"></i>
+                            <span class="text-uppercase font-weight-bold ml-1">Danh mục sách</span>
+                        </div>
+                        <!-- CATEGORIES -->
+                        <div class="categorycontent">
+                        <ul >
+                            @foreach($category as $key => $cate)
+                            <li> <a href="{{URL::to('/danh-muc-san-pham/'.$cate->categoryid)}}">{{$cate->categoryname}}</a><i class="fa fa-chevron-right float-right"></i>
+                              <ul>
+                                    <li class="liheader"><a href="#" class="header text-uppercase">{{$cate->categoryname}}</a></li>
+                                @foreach($sub_cate as $key => $sub)    
+                                    @if($sub->parent == $cate->categoryid)                
+                                        <li style="margin-left:50px"><a href="{{URL::to('/danh-muc-san-pham/'.$sub->categoryid)}}">{{$sub->categoryname}}</a></li>
+                                    @endif
+                                @endforeach    
+                                </ul>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-md-5 ml-auto contact d-none d-md-block">
+                    <div class="benphai float-right">
+                        <div class="hotline">
+                            <i class="fa fa-phone"></i>
+                            <span>Hotline:<b>1900 1999</b> </span>
+                        </div>
+                        <i class="fas fa-comments-dollar"></i>
+                        <a href="#">Hỗ trợ trực tuyến </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
 <!-- nội dung của trang  -->
 <section class="product-page mb-4">
         <div class="container">

@@ -82,13 +82,13 @@ class CategoryProduct extends Controller
     //user
     public  function show_category_home($categoryid){
         
-        $cate_product = DB::table('categories')->get(); 
-        //$cate_child = DB::table('categories')->where('parent')->get(); 
+        $cate_product = DB::table('categories')->where('categories.parent',1)->get(); 
+        $sub_cate = DB::table('categories')->where('categories.parent','!=',1)->get();
         $category_by_id = DB::table('books')->join('categories','books.categoryid','=','categories.categoryid')->where(
             'books.categoryid',$categoryid)->get();
         $category_name = DB::table('categories')->where('categories.categoryid',$categoryid)->limit(1)->get();
         return view('pages.category.show_category')->with('category',$cate_product)->with('category_by_id',$category_by_id)->with(
-            'category_name',$category_name);
+            'category_name',$category_name)->with('sub_cate',$sub_cate);
     }
     
 }

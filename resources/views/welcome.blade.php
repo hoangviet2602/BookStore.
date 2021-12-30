@@ -89,6 +89,7 @@
                         </li>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item nutdangky text-center mb-2" href="{{URL::to('/dangxuat')}}">Đăng xuất</a>
+                            <a class="dropdown-item nutdangky text-center mb-2" href="{{URL::to('/show-profile')}}">Tài khoản của bạn</a>
                         </div>
                     </div>
                     <li class="nav-item giohang">
@@ -126,7 +127,7 @@
                             <a class="dropdown-item nutdangky text-center mb-2" href="#" data-toggle="modal"
                                 data-target="#formdangky">Đăng ký</a>
                             <a class="dropdown-item nutdangnhap text-center" href="#" data-toggle="modal"
-                                data-target="#formdangnhap">Đăng nhập</a>
+                                data-target="#formdangnhap">Đăng nhập </a>
                         </div>
                     </div>
                    
@@ -276,31 +277,7 @@
     </div>
 
 
-    <!-- thanh tieu de "danh muc sach" + hotline + ho tro truc tuyen -->
-    <section class="duoinavbar">
-        <div class="container text-white">
-            <div class="row justify">
-                <div class="col-md-3">
-                    <div class="categoryheader">
-                        <div class="noidungheader text-white">
-                            <i class="fa fa-bars"></i>
-                            <span class="text-uppercase font-weight-bold ml-1">Danh mục sách</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-9">
-                    <div class="benphai float-right">
-                        <div class="hotline">
-                            <i class="fa fa-phone"></i>
-                            <span>Hotline:<b>1900 1999</b> </span>
-                        </div>
-                        <i class="fas fa-comments-dollar"></i>
-                        <a href="#">Hỗ trợ trực tuyến </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    
 
    <!-- start body ........ -->
       <!-- start body ........ -->

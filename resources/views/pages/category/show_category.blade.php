@@ -1,7 +1,48 @@
 @extends('welcome')
 @section('content')
-
-
+<link rel="stylesheet" href="{{asset('public/frontend/css/product-item.css')}}">
+<!-- thanh "danh muc sach" đã được ẩn bên trong + hotline + ho tro truc tuyen -->
+<section class="duoinavbar">
+        <div class="container text-white">
+            <div class="row justify">
+                <div class="col-lg-3 col-md-5">
+                    <div class="categoryheader">
+                        <div class="noidungheader text-white">
+                            <i class="fa fa-bars"></i>
+                            <span class="text-uppercase font-weight-bold ml-1">Danh mục sách</span>
+                        </div>
+                        <!-- CATEGORIES -->
+                        <div class="categorycontent">
+                        <ul >
+                            @foreach($category as $key => $cate)
+                            <li> <a href="{{URL::to('/danh-muc-san-pham/'.$cate->categoryid)}}">{{$cate->categoryname}}</a><i class="fa fa-chevron-right float-right"></i>
+                              <ul>
+                                    <li class="liheader"><a href="#" class="header text-uppercase">{{$cate->categoryname}}</a></li>
+                                @foreach($sub_cate as $key => $sub)    
+                                    @if($sub->parent == $cate->categoryid)                
+                                        <li style="margin-left:50px"><a href="{{URL::to('/danh-muc-san-pham/'.$sub->categoryid)}}">{{$sub->categoryname}}</a></li>
+                                    @endif
+                                @endforeach    
+                                </ul>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-md-5 ml-auto contact d-none d-md-block">
+                    <div class="benphai float-right">
+                        <div class="hotline">
+                            <i class="fa fa-phone"></i>
+                            <span>Hotline:<b>1900 1999</b> </span>
+                        </div>
+                        <i class="fas fa-comments-dollar"></i>
+                        <a href="#">Hỗ trợ trực tuyến </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
    <!-- khoi sach moi  -->
    <section class="_1khoi sachmoi bg-white">
         <div class="container">
@@ -14,14 +55,15 @@
                           {{$name->categoryname}}
                         </h1>
                     @endforeach    
-                        
+                    
                     </div>
                 </div>
                
                 <div class="items">
                     <div class="row">
+                    @foreach($category_by_id as $key => $product)
                             <div class="col-lg-3 col-md-4 col-xs-6 item DeanGraziosi">
-                            @foreach($category_by_id as $key => $product)    
+                                
                                 <div class="card ">
                                     <a href="{{URL::to('/chi-tiet-san-pham/'.$product->bookid)}}" class="motsanpham"
                                         style="text-decoration: none; color: black;" data-toggle="tooltip"
@@ -49,9 +91,9 @@
                                         </div>
                                     </a>
                                 </div>
-                            @endforeach    
-                            </div>
                             
+                            </div>
+                            @endforeach      
                     </div>
                 </div>
             </div>

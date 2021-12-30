@@ -16,10 +16,12 @@ class HomeController extends Controller
 {
 
     public function index(){
-        $cate_product = DB::table('categories')->get(); 
-        $all_product = DB::table('books')->get();
+        $cate_product = DB::table('categories')->where('categories.parent',1)->get(); 
+        $sub_cate = DB::table('categories')->where('categories.parent','!=',1)->get();
+        $all_product = DB::table('books')->join('nxb','books.nxbid','=','nxb.nxbid')->where('books.type',1)->get();
         
-        return view('pages.home')->with('category',$cate_product)->with('all_product',$all_product);
+        // $cate_child = DB::table('categories')->where('categories.parent',$categoryid)->get();
+        return view('pages.home')->with('category',$cate_product)->with('all_product',$all_product)->with('sub_cate',$sub_cate);
     }
 
     

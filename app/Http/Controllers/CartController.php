@@ -40,7 +40,9 @@ class CartController extends Controller
         return Redirect::to('/show-cart');
     }
     public function show_cart(){
-        return view('pages.cart.show_cart');
+        $cate_product = DB::table('categories')->where('categories.parent',1)->get();
+        $sub_cate = DB::table('categories')->where('categories.parent','!=',1)->get();
+        return view('pages.cart.show_cart')->with('category',$cate_product)->with('sub_cate',$sub_cate);
     }
     public function delete_to_cart($rowId){
         Cart::update($rowId,0);

@@ -28,7 +28,9 @@ Route::post('/signin-cart', 'CartController@signin_cart');
 
 //checkout
 Route::post('/payment', 'CheckoutController@payment');
-
+//Profile + Ordered
+Route::get('/show-profile', 'ProfileController@show_profile');
+Route::get('/show-details-ordered/{orderid}', 'ProfileController@show_details_ordered');
 
 //login
 Route::post('/dangky', 'HomeController@postDangKy');
