@@ -13,13 +13,13 @@ class CategoryProduct extends Controller
 {
     // BEGIN ADMIN
     public function auth_login_admin() {
-        $admin_id = Session::get('id'); 
-        if($admin_id){ 
-            
-        }else{ 
-            return Redirect::to('admin')->send(); 
+            $admin_id = Session::get('user')->isadmin; 
+            if($admin_id == 1){ 
+                return Redirect::to('dashboard'); 
+            }else{ 
+                return Redirect::to('admin')->send(); 
+            } 
         } 
-    }
 
     public function show_all_category() {
         $this->auth_login_admin();

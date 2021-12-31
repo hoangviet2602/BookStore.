@@ -99,6 +99,9 @@
                         </li>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item nutdangky text-center mb-2" href="{{URL::to('/dangxuat')}}">Đăng xuất</a>
+                            @if(Session::get('user')->isadmin == 1)
+                                <a class="dropdown-item nutdangky text-center mb-2" href="{{URL::to('/show_dashboard')}}">Trang quản trị</a>
+                            @endif
                             <a class="dropdown-item nutdangky text-center mb-2" href="{{URL::to('/show-profile')}}">Tài khoản của bạn</a>
                         </div>
                     </div>
