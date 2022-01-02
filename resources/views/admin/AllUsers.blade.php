@@ -27,8 +27,8 @@
         </div> 
       </div> 
     </div> 
-    <div class="table-responsive"> 
-      <table class="table table-striped b-t b-light"> 
+    <div class="table-responsive" > 
+      <table class="table table-striped b-t b-light" id="myTable"> 
         <thead> 
           <tr> 
             <th>STT</th> 
@@ -70,9 +70,10 @@
   </div> 
 
   <script>
+      // $('#myTable').DataTable();
       $(document).ready(function() {
           load_data()
-
+          
           $(document).on('click', '.isadmin', function() {
               let userId = $(this).data('user_id')
               let userName = $(this).data('user_name')
@@ -166,5 +167,6 @@
                 }
           })
       }
+      
   </script>
 @endsection()

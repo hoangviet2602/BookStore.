@@ -123,6 +123,16 @@ Validator.isRequire = function (selector, message) {
     }
 }
 
+Validator.isPhoneNumber = function(selector, message) {
+    return {
+        selector,
+        test(value) {    
+            var regex = /^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/;
+            return regex.test(value)? undefined : message || 'Vui lòng nhập đúng số điện thoại'
+        }
+    }
+}
+
 Validator.isEmail = function(selector, message) {
     return {
         selector,
@@ -132,6 +142,8 @@ Validator.isEmail = function(selector, message) {
         }
     }
 }
+
+
 
 Validator.hasUser =function(seletor) {
 
@@ -155,3 +167,4 @@ Validator.isConfirm = function(selector, getPassword, message) {
         }
     }
 }
+

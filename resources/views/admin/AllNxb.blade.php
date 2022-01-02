@@ -3,54 +3,22 @@
 <!-- <h1>davaddsf</h1> -->
 <div class="panel panel-primary">
     <div class="panel-heading"
-        style="font-size: 2rem;">
+        style="font-size: 2rem; margin-bottom: 20px;">
       Danh sách toàn bộ nhà xuất bản đối tác
     </div> 
-    <div class="row w3-res-tb"> 
-      <div class="col-sm-5 m-b-xs"> 
-        <select class="input-sm form-control w-sm inline v-middle"> 
-          <option value="1">Xóa các mục đã chọn</option> 
-          <option value="0">Chọn tất cả</option> 
-          <option value="2">Bỏ chọn tất cả</option> 
-          <option value="3">Xuất</option> 
-        </select> 
-        <button class="btn btn-sm btn-default">Apply</button>                 
-      </div> 
-      <div class="col-sm-4"> 
-      </div> 
-      <div class="col-sm-3"> 
-        <div class="input-group"> 
-          <input type="text" class="input-sm form-control" placeholder="Search"> 
-          <span class="input-group-btn"> 
-            <button class="btn btn-sm btn-default" type="button">Go!</button> 
-          </span> 
-        </div> 
-      </div> 
-    </div> 
+    
     <div class="table-responsive"> 
-      <table class="table table-striped b-t b-light"> 
+      <table class="table table-striped b-t b-light" id="myTable"> 
         <thead> 
           <tr> 
-            <th style="width:20px;"> 
-              <label class="i-checks m-b-none"> 
-                <input type="checkbox"><i></i> 
-              </label> 
-            </th> 
             <th>Tên nhà xuất bảng</th> 
             <th>Thao tác</th> 
-            <th style="width:30px;"></th> 
           </tr> 
         </thead> 
 
         <tbody> 
           @foreach($list_nxb as $key=>$nxb)
           <tr> 
-            <td>
-              <label class="i-checks m-b-none">
-              <input type="checkbox" name="post[]">
-              <i></i>
-              </label>
-            </td> 
 
             <td>{{$nxb->nxb}}</td> 
 
@@ -93,4 +61,7 @@
       </div> 
     </footer> 
   </div> 
+  <script>
+    $('#myTable').DataTable();
+  </script>
 @endsection()
