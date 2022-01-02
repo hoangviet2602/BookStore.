@@ -18,10 +18,15 @@ class HomeController extends Controller
     public function index(){
         $cate_product = DB::table('categories')->where('categories.parent',1)->get(); 
         $sub_cate = DB::table('categories')->where('categories.parent','!=',1)->get();
-        $all_product = DB::table('books')->join('nxb','books.nxbid','=','nxb.nxbid')->where('books.type',1)->get();
+        $all_product1 = DB::table('books')->join('nxb','books.nxbid','=','nxb.nxbid')->where('books.type',1)->get();
+        $all_product2 = DB::table('books')->join('nxb','books.nxbid','=','nxb.nxbid')->where('books.type',2)->get();
+        $all_product3 = DB::table('books')->join('nxb','books.nxbid','=','nxb.nxbid')->where('books.type',3)->get();
+        $all_product4 = DB::table('books')->join('nxb','books.nxbid','=','nxb.nxbid')->where('books.type',4)->get();
+        
         
         // $cate_child = DB::table('categories')->where('categories.parent',$categoryid)->get();
-        return view('pages.home')->with('category',$cate_product)->with('all_product',$all_product)->with('sub_cate',$sub_cate);
+        return view('pages.home')->with('category',$cate_product)->with('all_product',$all_product1)->with('sub_cate',$sub_cate)
+        ->with('all_product2',$all_product2)->with('all_product3',$all_product3)->with('all_product4',$all_product4);
     }
 
     

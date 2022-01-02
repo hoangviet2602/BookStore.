@@ -144,16 +144,18 @@
                     </div>
                 </div>
                 <div class="khoisanpham">
+                @foreach($all_product2 as $key => $product)
                     <div class="card">
-                        <a href="#" class="motsanpham" style="text-decoration: none; color: black;"
-                            data-toggle="tooltip" data-placement="bottom" title="Chuyện Nghề Và Chuyện Đời - Bộ 4 Cuốn">
-                            <img class="card-img-top anh" src="{{('public/frontend/images/combo-chuyen-nghe-chuyen-doi.jpg')}}"
-                                alt="combo-chuyen-nghe-chuyen-doi">
+                        <a href="{{URL::to('/chi-tiet-san-pham/'.$product->bookid)}}" class="motsanpham"
+                            style="text-decoration: none; color: black;" data-toggle="tooltip" data-placement="bottom"
+                            title="Lập Kế Hoạch Kinh Doanh Hiệu Quả">
+                            <img class="card-img-top anh" src="{{URL::to('public/frontend/images/'.$product->bookimageurl)}}"
+                                alt="lap-ke-hoach-kinh-doanh-hieu-qua">
                             <div class="card-body noidungsp mt-3">
-                                <h3 class="card-title ten">Chuyện Nghề Và Chuyện Đời - Bộ 4 Cuốn</h3>
-                                <small class="tacgia text-muted">Nguyễn Hữu Long</small>
+                                <h3 class="card-title ten">{{$product->bookname}}</h3>
+                                <small class="tacgia text-muted">{{$product->nxb}}</small>
                                 <div class="gia d-flex align-items-baseline">
-                                    <div class="giamoi">111.200 ₫</div>
+                                    <div class="giamoi">{{number_format($product->price)}} ₫</div>
                                     <div class="giacu text-muted">139.000 ₫</div>
                                     <div class="sale">-20%</div>
                                 </div>
@@ -170,6 +172,7 @@
                             </div>
                         </a>
                     </div>
+                    @endforeach
 
                 </div>
             </div>
@@ -189,14 +192,15 @@
                 </div>
                 <div class="khoisanpham">
                     <!-- 1 san pham -->
+                    @foreach($all_product3 as $key => $product)
                     <div class="card">
                         <a href="#" class="motsanpham" style="text-decoration: none; color: black;"
                             data-toggle="tooltip" data-placement="bottom" title="Ngoại Giao Của Chính Quyền Sài Gòn">
-                            <img class="card-img-top anh" src="{{('public/frontend/images/ngoai-giao-cua-chinh-quyen-sai-gon.jpg')}}"
+                            <img class="card-img-top anh" src="{{URL::to('public/frontend/images/'.$product->bookimageurl)}}"
                                 alt="ngoai-giao-cua-chinh-quyen-sai-gon">
                             <div class="card-body noidungsp mt-3">
-                                <h3 class="card-title ten">Ngoại Giao Của Chính Quyền Sài Gòn</h3>
-                                <small class="tacgia text-muted">Brian Finch</small>
+                                <h3 class="card-title ten">{{$product->bookname}}</h3>
+                                <small class="tacgia text-muted">{{$product->nxb}}</small>
                                 <div class="gia d-flex align-items-baseline">
                                 </div>
                                 <div class="danhgia">
@@ -212,6 +216,7 @@
                             </div>
                         </a>
                     </div>
+                    @endforeach
   
                 
                 </div>
@@ -231,23 +236,24 @@
                         <a href="#" class="btn btn-warning btn-sm text-white">Xem tất cả</a>
                     </div>
                     <!-- 1 san pham -->
+                    @foreach($all_product4 as $key => $product)
                     <div class="col-lg col-sm-4">
                         <div class="card">
                             <a href="#" class="motsanpham" style="text-decoration: none; color: black;"
                                 data-toggle="tooltip" data-placement="bottom"
                                 title="Từng bước chân nở hoa: Khi câu kinh bước tới">
-                                <img class="card-img-top anh" src=""
+                                <img class="card-img-top anh" src="{{URL::to('public/frontend/images/'.$product->bookimageurl)}}"
                                     alt="tung-buoc-chan-no-hoa">
                                 <div class="card-body noidungsp mt-3">
-                                    <h3 class="card-title ten">Từng bước chân nở hoa: Khi câu kinh bước tới</h3>
-                                    <small class="thoigian text-muted">03/04/2020</small>
+                                    <h3 class="card-title ten">{{$product->bookname}}</h3>
+                                    <small class="thoigian text-muted">{{$product->releasedate}}</small>
                                     <div><a class="detail" href="#">Xem chi tiết</a></div>
                                 </div>
                             </a>
                         </div>
                     </div>
-                   
-                    <!-- <div class="col-lg col-sm-4">
+                    @endforeach
+                    <div class="col-lg col-sm-4">
                         <div class="card cuoicung">
                             <a href="#" class="motsanpham" style="text-decoration: none; color: black;"
                                 data-toggle="tooltip" data-placement="bottom"
@@ -261,7 +267,7 @@
                                 </div>
                             </a>
                         </div>
-                    </div> -->
+                    </div>
                   
                     
                 
