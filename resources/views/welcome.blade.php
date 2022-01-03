@@ -258,14 +258,17 @@
                         <input type="password" autocomplete="off" class="form-control" id="res-password" name="res-password">
                         <p class="form-message"></p>
                     </div>
-                        <!-- <div class="form-label-group mb-4">
-                            <input type="password" class="form-control" name="confirm_password"
-                                placeholder="Nhập lại mật khẩu" required>
-                        </div> -->
+
+                    <div class="form-group">
+                        <label for="res-passwordcf" class="form-label">Nhập lại mật khẩu</label>
+                        <input type="password" autocomplete="off" class="form-control" id="res-passwordcf" name="res-passwordcf">
+                        <p class="form-message"></p>
+                    </div>
+                    
                         <button 
                             class="btn btn-lg btn-block btn-signin text-uppercase text-white mt-3" 
-                            type="submit"
                             style="background: #F5A623"
+                            type="submit"
                             id="btn-register"
                             >Đăng ký
                         </button>
@@ -450,12 +453,12 @@
             message: '.form-message',
             rules: [
                 Validator.isRequire('#res-fullname'),
-                Validator.isRequire('#res-phone'),
+                // Validator.isPhoneNumber('#res-phone'),
                 Validator.isEmail('#res-email'),
                 Validator.isPassword('#res-password'),
-                // Validator.isConfirm('#res-email', function() {
-                //     return document.querySelector('#form-1 #password').value;
-                // }, 'Nhập lại mật khẩu chưa đúng')
+                Validator.isConfirm('#res-passwordcf', function() {
+                    return document.querySelector('#form-signup #res-password').value;
+                }, 'Nhập lại mật khẩu chưa đúng')
             ],
                 onSubmit: function(data) {
                     let userName = $('#res-fullname').val()
@@ -478,18 +481,15 @@
                 },
                 success: function(data) {
                     if(data == 'fail')
-                        $.notify(`Đăng ký thất bại`, 'error')
-                    if(data == 'success')
+                        $.notify(`Email đăng ký đã tồn tại`, 'error')
+                    if(data == 'success') {
                         $.notify(`Đăng ký thành công`, 'success')
                         window.location.replace("{{url('/')}}");
+                    }
                 }
             })
                 }
         });
-        // $('#form-signup').submit(function(e) {
-        //     e.preventDefault();
-           
-        // })
 
         $('#form-signin').submit(function(e) {
             e.preventDefault();
