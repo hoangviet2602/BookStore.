@@ -55,6 +55,7 @@
         <div class="container">
             <!-- chi tiết 1 sản phẩm -->
             @foreach($product_details as $key =>$value)
+
             <div class="product-detail bg-white p-4">
                 <div class="row">
                     <!-- ảnh  -->
@@ -151,6 +152,9 @@
                                 <a class="nav-item nav-link active text-uppercase" id="nav-gioithieu-tab"
                                     data-toggle="tab" href="#nav-gioithieu" role="tab" aria-controls="nav-gioithieu"
                                     aria-selected="true">Giới thiệu</a>
+                                    <a class="nav-item nav-link text-uppercase" id="nav-danhgia-tab" data-toggle="tab"
+                                    href="#nav-binhluan" role="tab" aria-controls="nav-danhgia"
+                                    aria-selected="false">Bình luận</a>
                                 <a class="nav-item nav-link text-uppercase" id="nav-danhgia-tab" data-toggle="tab"
                                     href="#nav-danhgia" role="tab" aria-controls="nav-danhgia"
                                     aria-selected="false">Đánh
@@ -162,7 +166,7 @@
                             <div class="tab-pane fade show active ml-3" id="nav-gioithieu" role="tabpanel"
                                 aria-labelledby="nav-gioithieu-tab">
                                 <h6 class="tieude font-weight-bold">{{$value->bookname}}</h6>
-                                <p>@endforeach
+                                <p>
                                     <span>Khi bắt đầu thành lập doanh nghiệp hay mở rộng quy mô hoạt động, lập ra một
                                         bản kế hoạch kinh doanh là bước đi đầu tiên không thể thiếu. Bản kế hoạch kinh
                                         doanh càng được chuẩn bị kỹ lưỡng và lôi cuốn bao nhiêu, cơ hội ghi điểm trước
@@ -225,6 +229,57 @@
                                         xây dựng thành công kế hoạch kinh doanh của riêng mình.</span>
                                 </p>
                             </div>
+                                <!-- nav-binhluan -->
+                                <div class="tab-pane fade" id="nav-binhluan" role="tabpanel"
+                                aria-labelledby="nav-gioithieu-tab">
+                                <!-- hienthi binhluan -->
+                                <style type="text/css">
+                                    .style_comment{
+                                        border: 1px solid #ddd;
+                                        border-radius: 10px;
+                                        background:#F0F0E9;
+                                    }
+                                </style>    
+                                <form>
+                                @csrf
+                                <div id="comment_show"></div>
+                                <input type="hidden" name="comment_product_id" class="comment_product_id" value="{{$value->bookid}}">
+
+                                
+                                </form>
+                               
+                                    <!-- them binh luan -->
+                                    
+                                <div class="col-md-5" style="margin-left:150px">
+                                        <div class="tiledanhgia text-center">
+                                            
+                                            <div class="btn vietdanhgia mt-3">Viết bình luận của bạn</div>
+                                        </div>
+                                        <!-- nội dung của form đánh giá  -->
+                                        <form action="#">
+                                        
+                                        <div class="formdanhgia">
+                                        <div id="notify_comment"></div>
+                                            <h6 class="tieude text-uppercase">GỬI BÌNH LUẬN CỦA BẠN</h6>
+                                            <span class="danhgiacuaban">Bình luận của bạn về sản phẩm này:</span>
+                                         
+                                            <div class="form-group">
+                                                <input type="text" class="comment_name" placeholder="Mời bạn nhập tên">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" class="comment_email" placeholder="Mời bạn nhập email">
+                                            </div>
+                                            <div class="form-group" >
+                                                <textarea name="binhluan" style="width:300px;height:120px" class="comment_content" > </textarea>
+                                            </div>
+                                            <button type="button" class="btn nutguibl send-comment">  Gửi bình luận</button>
+                                            
+                                        </div> 
+                                        </form>
+                                </div>
+                                    
+                            </div>
+                            <!-- nav-danhgia -->
                             <div class="tab-pane fade" id="nav-danhgia" role="tabpanel" aria-labelledby="nav-danhgia-tab">
                                 <div class="row">
                                     <div class="col-md-3 text-center">
@@ -255,7 +310,7 @@
                                             </div>
                                             <div class="motthanh d-flex align-items-center">3 <i class="fa fa-star"></i>
                                                 <div class="progress mx-2">
-                                                    <div class="progress-bar" role="progressbar" aria-valuenow="0"
+                                                    <div class="progress-bar" role="progressbar" aria-valuenow="90"
                                                         aria-valuemin="0" aria-valuemax="100"></div>
                                                 </div> 0%
                                             </div>
@@ -295,6 +350,7 @@
                                             </div>
                                             <div class="btn nutguibl">Gửi bình luận</div>
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -309,6 +365,7 @@
             </div>
             <!-- het product-detail -->
         </div>
+        @endforeach
         <!-- het container  -->
     </section>
     @endsection

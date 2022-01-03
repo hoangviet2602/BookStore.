@@ -48,8 +48,49 @@
             color: red;
         }
     </style>
+<!-- ajax comment -->
+<script type="text/javascript">
+    $(document).ready(function(){
+       load_comment();
+        
+        // alert(product_id);
+        function load_comment(){
+            var product_id = $('.comment_product_id').val();
+            var _token = $('input[name="_token"]').val(); 
+            $.ajax({
+                url:"{{url('/load-comment')}}",
+                method :"POST",
+                data:{product_id:product_id,_token:_token},
+                success:function(data){
+                   
+                    $('#comment_show').html(data);
+                }
+            });
+        }
+        $('.send-comment').click(function(){
+            var product_id = $('.comment_product_id').val();
+            var comment_name = $('.comment_name').val();
+            var comment_email = $('.comment_email').val();
+            var comment_content = $('.comment_content').val();
+            var _token = $('input[name="_token"]').val(); 
+            
+            $.ajax({
+                url:"{{url('/send-comment')}}",
+                method :"POST",
+                data:{product_id:product_id,comment_name:comment_name,comment_email:comment_email,comment_content:comment_content,_token:_token},
+                success:function(data){
+                    $('#notify_comment').html('<p class="text text-succes">Thêm bình luận thành công</p>')
+                    load_comment();
+                    $('#notify_comment').fadeOut(2000);
+                    $('.comment_name').val('');
+                    $('.comment_email').val('');
+                    $('.comment_content').val('');
+                }
+            });
+        });
+    });
 
- 
+</script>
     
 </head>
 

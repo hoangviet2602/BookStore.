@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 02, 2022 at 04:17 AM
+-- Generation Time: Jan 03, 2022 at 09:57 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.30
 
@@ -32,6 +32,32 @@ CREATE TABLE `banner` (
   `slide_name` varchar(100) NOT NULL,
   `imageurl` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `binhluan`
+--
+
+CREATE TABLE `binhluan` (
+  `commentid` int(11) NOT NULL,
+  `noidung` varchar(255) NOT NULL,
+  `ten` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `bookid` int(6) UNSIGNED ZEROFILL NOT NULL,
+  `date` datetime NOT NULL DEFAULT current_timestamp(),
+  `hienthi` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `binhluan`
+--
+
+INSERT INTO `binhluan` (`commentid`, `noidung`, `ten`, `email`, `bookid`, `date`, `hienthi`) VALUES
+(1, 'Sách rất hay!!', 'Hoàng Việt', 'hoangvietnguyen@gmail.com', 000044, '2022-01-02 17:58:03', 0),
+(2, 'Nếu bạn muốn có một cuốn sách đọc cho nhanh, cuốn sách này không dành cho bạn. Nếu bạn chỉ yêu thích kết thúc có hậu, cuốn sách này cũng không dành cho bạn. Nếu bạn không thích những bối cảnh siêu nhiên, cuốn sách này cũng không dành cho bạn.', 'Hoàng Nam', 'hoangnam@gmail.com', 000044, '2022-01-02 17:58:49', 0),
+(9, 'Sách rất hay. Nên đọc!!', 'Quốc Huy', 'huy@gmail.com', 000044, '2022-01-03 10:29:49', 0),
+(12, 'Web rất đẹp', 'Ajax', 'ajax@gmail.com', 000044, '2022-01-03 10:34:16', 0);
 
 -- --------------------------------------------------------
 
@@ -192,7 +218,8 @@ INSERT INTO `orders` (`orderid`, `userid`, `orderstatus`, `timestamp`, `address`
 (000082, 000030, '0', '2021-12-29 23:53:30', '144', '210,540.00 đ', 'Nguyễn Hoàng Việt', '0768570252'),
 (000083, 000030, '0', '2021-12-30 17:30:53', '144', '66,550.00 đ', 'Nguyễn Hoàng Việt', '0768570252'),
 (000084, 000030, '0', '2021-12-30 17:38:59', '144', '410,190.00 đ', 'Nguyễn Hoàng Việt', '0768570252'),
-(000085, 000030, '0', '2021-12-30 22:13:20', '144', '133,100.00 đ', 'Nguyễn Hoàng Việt', '0768570252');
+(000085, 000030, '0', '2021-12-30 22:13:20', '144', '133,100.00 đ', 'Nguyễn Hoàng Việt', '0768570252'),
+(000086, 000030, '0', '2022-01-03 08:23:21', '144', '235,950.00 đ', 'Nguyễn Hoàng Việt', '0768570252');
 
 -- --------------------------------------------------------
 
@@ -220,7 +247,8 @@ INSERT INTO `ordersdetails` (`qtyordered`, `amount`, `orderid`, `bookid`) VALUES
 (1, 55000, 000083, 000044),
 (4, 55000, 000084, 000044),
 (1, 119000, 000084, 000046),
-(2, 55000, 000085, 000044);
+(2, 55000, 000085, 000044),
+(1, 195000, 000086, 000050);
 
 -- --------------------------------------------------------
 
@@ -262,6 +290,13 @@ INSERT INTO `users` (`userid`, `password`, `isadmin`, `isdisable`, `fullname`, `
 --
 ALTER TABLE `banner`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `binhluan`
+--
+ALTER TABLE `binhluan`
+  ADD PRIMARY KEY (`commentid`),
+  ADD KEY `bookid` (`bookid`);
 
 --
 -- Indexes for table `books`
@@ -328,6 +363,12 @@ ALTER TABLE `banner`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `binhluan`
+--
+ALTER TABLE `binhluan`
+  MODIFY `commentid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
 -- AUTO_INCREMENT for table `books`
 --
 ALTER TABLE `books`
@@ -355,7 +396,7 @@ ALTER TABLE `nxb`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `orderid` int(6) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `orderid` int(6) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -366,6 +407,12 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `binhluan`
+--
+ALTER TABLE `binhluan`
+  ADD CONSTRAINT `binhluan_ibfk_1` FOREIGN KEY (`bookid`) REFERENCES `books` (`bookid`);
 
 --
 -- Constraints for table `books`

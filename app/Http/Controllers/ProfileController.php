@@ -12,6 +12,8 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Foundation\Console\Presets\React;
 use Illuminate\Support\Facades\Redirect;
 use App\User;
+use Symfony\Component\Console\Output\Output;
+
 session_start();
 
 class ProfileController extends Controller
@@ -36,5 +38,49 @@ class ProfileController extends Controller
             'orderid',$orderid)->get();
 
         return view('pages.profile.profile')->with('ordered',$ordered)->with('details',$orderdetail)->with('category',$cate_product)->with('sub_cate',$sub_cate);;
+    }
+    public function load_comment(Request $request){
+        $product_id = $request->product_id;
+        $comment = DB::table('binhluan')->where('bookid','000'. $product_id)->get();
+        $output = '';
+        foreach($comment as $key => $comm){
+            $output .= '<div class="row style_comment" >
+            <div class="col-md-3">
+                
+                <img width="50%" src="'.url('public/frontend/images/edit-profile-removebg-preview.png').'" 
+               
+                style="margin:5px;">
+            </div> 
+            <div class="col-md-9" style="margin-left:-50px ;margin-top:10px;">
+            
+            <p style="color:red;font-size: 18px;">
+                  <b>  @'.$comm->ten.' </b>
+            </p> 
+            <p style="margin-left:130px;margin-top:-38px;font-size: 13px;color:gray">
+                    '.$comm->date.'
+            </p> 
+            <p>
+            '.$comm->noidung.'
+            </p>  
+            </div>
+        </div> <p></p>';
+        }
+        echo  $output;
+    }
+    public function send_comment(Request $request){
+        // $product_id = $request->product_id;
+        // $name = $request->comment_name;
+        // $email = $request->comment_email;
+        // $noidung = $request->comment_content;
+        $data = array();
+        $data['bookid'] = '000'.$request->product_id;
+        $data['ten'] = $request->comment_name;
+        $data['email'] = $request->comment_email;
+        $data['noidung'] = $request->comment_content;
+       
+        
+        
+        Db::table('binhluan')->insert($data);
+        
     }
 }

@@ -31,7 +31,8 @@ Route::post('/payment', 'CheckoutController@payment');
 //Profile + Ordered
 Route::get('/show-profile', 'ProfileController@show_profile');
 Route::get('/show-details-ordered/{orderid}', 'ProfileController@show_details_ordered');
-
+Route::post('/load-comment', 'ProfileController@load_comment');
+Route::post('/send-comment', 'ProfileController@send_comment');
 //login
 Route::post('/dangky', 'HomeController@postDangKy');
 Route::post('/dangnhap', 'HomeController@postDangNhap');

@@ -84,11 +84,14 @@ class CategoryProduct extends Controller
         
         $cate_product = DB::table('categories')->where('categories.parent',1)->get(); 
         $sub_cate = DB::table('categories')->where('categories.parent','!=',1)->get();
-        $category_by_id = DB::table('books')->join('categories','books.categoryid','=','categories.categoryid')->where(
+        $category_by_id_cha = DB::table('books')->join('categories','books.categoryid','=','categories.categoryid')->where(
             'books.categoryid',$categoryid)->get();
+        $category_by_sub_id   = DB::table('books')->join('categories','books.categoryid','=','categories.categoryid')->where(
+                'categories.parent',$categoryid)->get();
+        
         $category_name = DB::table('categories')->where('categories.categoryid',$categoryid)->limit(1)->get();
-        return view('pages.category.show_category')->with('category',$cate_product)->with('category_by_id',$category_by_id)->with(
-            'category_name',$category_name)->with('sub_cate',$sub_cate);
+        return view('pages.category.show_category')->with('category',$cate_product)->with('category_by_id',$category_by_id_cha)
+        ->with('category_by_sub_id',$category_by_sub_id)->with('category_name',$category_name)->with('sub_cate',$sub_cate);
     }
     
 }
