@@ -115,17 +115,32 @@
 
             <div class="collapse navbar-collapse" id="collapsibleNavId">
                 <!-- form tìm kiếm  -->
-                <form class="form-inline ml-auto my-2 my-lg-0 mr-3">
+                <form 
+                    class="form-inline ml-auto my-2 my-lg-0 mr-3"
+                    method="POST"
+                    action="{{URL::to('/search')}}">
+                    {{ csrf_field() }}
                     <div class="input-group" style="width: 520px;">
-                        <input type="text" class="form-control" aria-label="Small"
-                            placeholder="Nhập sách cần tìm kiếm...">
+                        <input 
+                            type="text" 
+                            name="search_key"
+                            class="input-search form-control" 
+                            aria-label="Small"
+                            autocomplete="off"
+                            placeholder="Nhập sách cần tìm kiếm..."
+                        >
                         <div class="input-group-append">
-                            <button type="button" class="btn" style="background-color: #CF111A; color: white;">
+                            <button type="submit" class="btn" style="background-color: #CF111A; color: white;">
                                 <i class="fa fa-search"></i>
                             </button>
                         </div>
+
+                        <ul class="input-result">
+                            
+                        </ul>
                     </div>
                 </form>
+                
                 @if(isset(Session::get('user')->userid))
                 <!-- ô đăng xuất khi đăng nhập thành công -->
                 <ul class="navbar-nav mb-1 ml-auto">
@@ -515,6 +530,37 @@
                     }
                 }
             })
+        })
+
+        $(document).on('keyup', '.input-search', function(e) {
+            let searchKey = $(this).val();
+            if(searchKey) {
+                $.ajax({
+                    url: "{{url('/get_suggestion')}}",
+                    method: 'post',
+                    data: {
+                        searchKey: searchKey
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(data) {
+                        if(data) {
+                            $('.input-result').css('display', 'block')
+                            $('.input-result').html(data)
+                        } else {
+                            $('.input-result').css('display', 'none')
+                        }
+                    }
+                })
+            }  else {
+                $('.input-result').css('display', 'none')
+            }
+
+        })
+
+        $(document).on('blur', '.input-search', function() {
+            $('.input-result').css('display', 'none')
         })
     </script>
 </body>
