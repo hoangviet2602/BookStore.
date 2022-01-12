@@ -37,6 +37,10 @@ Route::post('/dangky', 'HomeController@postDangKy');
 Route::post('/dangnhap', 'HomeController@postDangNhap');
 Route::get('/dangxuat', 'HomeController@getDangXuat');
 
+// search
+Route:: post('/search', 'SearchController@show_search_results');
+Route:: post('/get_suggestion', 'SearchController@show_suggestion');
+
 
 
 
@@ -72,4 +76,9 @@ Route::post('/admin_disable', 'UsersController@disableAdmin');
 Route::post('/user_disable', 'UsersController@disableUser');
 Route::post('/user_enable', 'UsersController@enableUser');
 Route::post('/remove_user', 'UsersController@remove_user');
+
+// admin orders
+Route::get('/all_orders', 'OrderController@show_all_orders');
+Route::get('/order_detail/{id}', 'OrderController@show_order_details');
+Route::post('/order_confirm', 'OrderController@confirm_order');
 // END ADMIN

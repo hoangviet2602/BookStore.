@@ -141,18 +141,20 @@
           $(document).on('click', '#delete', function() {
             let userId = $(this).data('user_id')
             let userName = $(this).data('user_name')
-            $.ajax({
-                url: "{{url('/remove_user')}}",
-                method: 'post',
-                data: {userId:userId},
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(data) {
-                    $.notify(`Đã xóa người dùng ${userName}`, 'info')
-                    load_data()
-                }
-            })
+            if(confirm(`Bạn có chắc muốn xóa ${userName}`)) {
+                $.ajax({
+                    url: "{{url('/remove_user')}}",
+                    method: 'post',
+                    data: {userId:userId},
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(data) {
+                        $.notify(`Đã xóa người dùng ${userName}`, 'info')
+                        load_data()
+                    }
+                })
+            }
           })
       })
       function load_data() {
