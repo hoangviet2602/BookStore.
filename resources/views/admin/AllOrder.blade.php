@@ -12,7 +12,7 @@
           <option value="0">Tất cả</option> 
           <option value="1">Chờ xác nhận</option> 
           <option value="2">Đang xử lý</option> 
-          <option value="3">Đã giao</option> 
+          <option value="3">Thành công</option> 
         </select> 
         <button class="btn btn-sm btn-default">Apply</button>                 
       </form> 
@@ -43,10 +43,12 @@
             <td>{{$order->email}}</td> 
             <td>{{$order->timestamp}}</td> 
             <td>{{$order->totalmoney}}</td>
-            @if($order->orderstatus == 1)
+            @if($order->orderstatus == 0)
+                <td>Chờ xác nhận</td> 
+            @elseif($order->orderstatus == 1)
                 <td>Đang xử lý</td> 
             @else
-                <td>Chờ xác nhận</td> 
+                <td>Thành công</td> 
             @endif
             <td>
               <button class="btn btn-warning">
