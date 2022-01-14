@@ -1,5 +1,18 @@
 @extends('welcome')
 @section('content')
+<style>
+    nav {
+        height: 80px;
+        position: relative;
+    }
+
+    .pagination {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
 <link rel="stylesheet" href="{{asset('public/frontend/css/product-item.css')}}">
 <!-- thanh "danh muc sach" đã được ẩn bên trong + hotline + ho tro truc tuyen -->
 <section class="duoinavbar">
@@ -93,6 +106,9 @@
                             </div>
                         @endforeach      
                     </div>
+                </div>
+                <div class="col-md-12" style="text-align: center; margin-top:30px;">
+                    {!!$search_results->links('pagination::bootstrap-4')!!}
                 </div>
             @else
                 <div class="row">

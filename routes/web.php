@@ -18,6 +18,8 @@ Route::get('/', 'HomeController@index');
 Route::get('/trang-chu', 'HomeController@index');
 Route::get('/danh-muc-san-pham/{categoryid}', 'CategoryProduct@show_category_home');
 Route::get('/chi-tiet-san-pham/{bookid}', 'ProductController@details_product');
+Route::post('/change_password', 'HomeController@changedPassword');
+
 //cart
 Route::post('/save-cart', 'CartController@save_cart');
 Route::get('/show-cart', 'CartController@show_cart');
@@ -33,13 +35,14 @@ Route::get('/show-profile', 'ProfileController@show_profile');
 Route::get('/show-details-ordered/{orderid}', 'ProfileController@show_details_ordered');
 Route::post('/load-comment', 'ProfileController@load_comment');
 Route::post('/send-comment', 'ProfileController@send_comment');
+
 //login
 Route::post('/dangky', 'HomeController@postDangKy');
 Route::post('/dangnhap', 'HomeController@postDangNhap');
 Route::get('/dangxuat', 'HomeController@getDangXuat');
 
 // search
-Route:: post('/search', 'SearchController@show_search_results');
+Route:: get('/search', 'SearchController@show_search_results');
 Route:: post('/get_suggestion', 'SearchController@show_suggestion');
 
 
@@ -82,4 +85,7 @@ Route::post('/remove_user', 'UsersController@remove_user');
 Route::get('/all_orders', 'OrderController@show_all_orders');
 Route::get('/order_detail/{id}', 'OrderController@show_order_details');
 Route::post('/order_confirm', 'OrderController@confirm_order');
+Route::post('/order_success', 'OrderController@success_order');
+Route::post('/order_delete', 'OrderController@delete_order');
+Route::get('/order_filter', 'OrderController@filter_orders');
 // END ADMIN

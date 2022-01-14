@@ -31,6 +31,10 @@ class User extends Authenticatable
         DB::table('users')->insert($user);
     }
 
+    protected static function updateUser($userid, $data) {
+        return DB::table('users')->where('userid', $userid)->update($data);
+    }
+
     protected static function find() {
 
     }

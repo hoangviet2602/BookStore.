@@ -117,7 +117,7 @@
                 <!-- form tìm kiếm  -->
                 <form 
                     class="form-inline ml-auto my-2 my-lg-0 mr-3"
-                    method="POST"
+                    method="get"
                     action="{{URL::to('/search')}}">
                     {{ csrf_field() }}
                     <div class="input-group" style="width: 520px;">
@@ -477,32 +477,32 @@
             ],
                 onSubmit: function(data) {
                     let userName = $('#res-fullname').val()
-            let userEmail = $('#res-email').val()
-            let userPhone = $('#res-phone').val()
-            let userPassword = $('#res-password').val()
-            $.ajax({
-                url: "{{url('/dangky')}}",
-                method: 'post',
-                data: 
-                {
-                    fullname: userName,
-                    email: userEmail,
-                    phone: userPhone,
-                    password: userPassword
+                    let userEmail = $('#res-email').val()
+                    let userPhone = $('#res-phone').val()
+                    let userPassword = $('#res-password').val()
+                    $.ajax({
+                        url: "{{url('/dangky')}}",
+                        method: 'post',
+                        data: 
+                        {
+                            fullname: userName,
+                            email: userEmail,
+                            phone: userPhone,
+                            password: userPassword
 
-                },
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(data) {
-                    if(data == 'fail')
-                        $.notify(`Email đăng ký đã tồn tại`, 'error')
-                    if(data == 'success') {
-                        $.notify(`Đăng ký thành công`, 'success')
-                        window.location.replace("{{url('/')}}");
-                    }
-                }
-            })
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(data) {
+                            if(data == 'fail')
+                                $.notify(`Email đăng ký đã tồn tại`, 'error')
+                            if(data == 'success') {
+                                $.notify(`Đăng ký thành công`, 'success')
+                                window.location.replace("{{url('/')}}")
+                            }
+                        }
+                    })
                 }
         });
 
@@ -522,12 +522,15 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(data) {
-                    if(data == 'fail')
+                    if(data == 'fail') {
                         $.notify(`Đăng nhập thất bại`, 'error')
+                    }
                     if(data == 'success') {
                         $.notify(`Đăng nhập thành công`, 'success')
                         window.location.replace("{{url('/')}}");
                     }
+                    if(data == 'disabled')
+                        $.notify(`Rất tiếc, tài khoản của bạn đã bị khóa!`, 'error')
                 }
             })
         })
@@ -555,13 +558,11 @@
                 })
             }  else {
                 $('.input-result').css('display', 'none')
-            }
+            }   
 
         })
 
-        $(document).on('blur', '.input-search', function() {
-            $('.input-result').css('display', 'none')
-        })
+        
     </script>
 </body>
 
