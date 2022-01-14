@@ -249,23 +249,27 @@
                     let confirm_pass = $('#res-passworddcf').val()
                     let userid = $('#submit-change').data('user_id')
                     let email = $('#submit-change').data('email')
-                    // $.ajax({
-                    //     url: "{{url('/change_password')}}",
-                    //     method: 'post',
-                    //     data: 
-                    //     {
-                    //         newPassword: new_pass,
-                    //         email: email,
-                    //         password: old_pass,
-                    //         userId: userid
-                    //     },
-                    //     headers: {
-                    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    //     },
-                    //     success: function(data) {
-                    //         $.notify(data, 'error')
-                    //     }
-                    // })
+                    $.ajax({
+                        url: "{{url('/change_password')}}",
+                        method: 'post',
+                        data: 
+                        {
+                            newPassword: new_pass,
+                            email: email,
+                            password: old_pass,
+                            userId: userid
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(data) {
+                            if(data =='Cập nhật thành công') {
+                                alert('Cập nhật mật khẩu thành công!')
+                                window.location.replace("{{url('/')}}");
+                            }
+                            $.notify(data, 'error')
+                        }
+                    })
                 }
             })
         })
