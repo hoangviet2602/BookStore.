@@ -16,13 +16,12 @@ class SearchController extends Controller
         $searchKey = $request->search_key;
         $cate_product = DB::table('categories')->where('categories.parent',1)->get(); 
         $sub_cate = DB::table('categories')->where('categories.parent','!=',1)->get();
-        $search_results = DB::table('books')->where('bookname','like', '%'.$searchKey.'%')->get();
+        $search_results = DB::table('books')->where('bookname','like', '%'.$searchKey.'%')->paginate(12);
         return view('pages.searchresult.search_result')
                     ->with('category',$cate_product)
                     ->with('search_key',$searchKey)
                     ->with('sub_cate',$sub_cate)
-                    ->with('search_results',$search_results);
-                    
+                    ->with('search_results',$search_results);                    
     }
 
     public function show_suggestion (Request $request) {

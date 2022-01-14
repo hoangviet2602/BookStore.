@@ -21,6 +21,10 @@ class ProductController extends Controller
         $detai_product = DB::table('books')
         ->join('nxb','nxb.nxbid','=','books.nxbid')
         ->where('bookid','=',$bookid)->get();
-        return view('pages.product.show_details')->with('category',$cate_product)->with('product_details',$detai_product)->with('sub_cate',$sub_cate);
+        $product_summary = DB::table('noidungsach')->where('idsach', $bookid)->get();
+        return view('pages.product.show_details')->with('category',$cate_product)
+            ->with('product_details',$detai_product)
+            ->with('sub_cate',$sub_cate)
+            ->with('product_summary', $product_summary);
     }
 }

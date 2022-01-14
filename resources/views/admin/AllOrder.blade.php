@@ -7,14 +7,14 @@
       Danh sách đơn hàng
     </div> 
     <div class="row w3-res-tb"> 
-      <form class="col-sm-5 m-b-xs"> 
-        <select class="input-sm form-control w-sm inline v-middle"> 
+      <form class="col-sm-5 m-b-xs" method="get" action="{{url('order_filter')}}"> 
+        <select name="filter" class="input-sm form-control w-sm inline v-middle"> 
           <option value="0">Tất cả</option> 
           <option value="1">Chờ xác nhận</option> 
           <option value="2">Đang xử lý</option> 
           <option value="3">Thành công</option> 
         </select> 
-        <button class="btn btn-sm btn-default">Apply</button>                 
+        <button type="submit" class="btn btn-sm btn-default">Apply</button>                 
       </form> 
     </div> 
       
@@ -55,7 +55,7 @@
                 <a href="{{URL::to('order_detail/'.$order->orderid)}}">Chi tiết</a>
               </button>
               <button class="btn btn-danger">
-                <a href="">Xóa</a>
+                <a data-order__id="{{$order->orderid}}" href="" class="order__delete">Xóa</a>
               </button>
             </td>
           </tr> 
@@ -66,6 +66,30 @@
 </div> 
 <script>
     $('#myTable').DataTable();
+    $(document).on('click', '.order__delete', function() {
+      if(confirm('Bạn có muốn xóa đơn hàng này?')) {
+        let orderId = $(this).data('order__id')
+           $.ajax({
+                url: "{{url('/order_delete')}}",
+                method: 'post',
+                data: {
+                    orderId: orderId
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(data) {
+                  if(data == 'success') {
+                    $.notify('Đã xóa đơn hàng thành công', 'success')
+                    window.location.replace("{{url('/all_orders')}}");
+                  } 
+
+                  if(data == 'failure')
+                    $.notify('Cập nhật thất bại', 'warning')
+                }
+           })
+      }
+    })
   </script>
  
 @endsection()

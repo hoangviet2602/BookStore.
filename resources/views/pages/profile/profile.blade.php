@@ -5,6 +5,13 @@
     <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 <link rel="stylesheet" href="{{asset('public/frontend/css/tai-khoan.css')}}">
 <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+<style>
+    .form-message {
+        display: flex;
+        margin: auto;
+        margin-left: 10px;
+    }
+</style>
 <section class="duoinavbar">
         <div class="container text-white">
             <div class="row justify">
@@ -91,35 +98,40 @@
                         </div>
                         <!-- nội dung tab 2: đổi mật khẩu-->
                         <div class="tab-pane fade py-3" id="nav-doimatkhau" role="tabpanel" aria-labelledby="nav-donhang-tab">
-                            <div class="donhang-table">
-                                <table class="m-auto">
-                                <div class="thay-doi-mk">
-                                <div class="mkcu my-3">
-                                    <div class="row">
-                                        <label class="col-md-2 offset-md-2" for="account-mkcu">Mật khẩu cũ</label>
-                                        <input class="col-md-4" type="text" name="account-mkcu">
-                                    </div>
-                                </div>
-                                <div class="mkmoi my-3">
-                                    <div class="row">
-                                        <label class="col-md-2 offset-md-2" for="account-mkmoi">Mật khẩu mới</label>
-                                        <input class="col-md-4" type="text" name="account-mkmoi">
-                                    </div>
-                                </div>
-                                <div class="xacnhan-mkmoi my-3">
-                                    <div class="row">
-                                        <label class="col-md-2 offset-md-2" for="account-xacnhan-mkmoi">Xác nhận mật khẩu</label>
-                                        <input class="col-md-4" type="text" name="account-xacnhan-mkmoi">
-                                    </div>
-                                </div>
-                                <div class="capnhat my-3">
-                                    <div class="row">
-                                        <button type="button" class="button-capnhat text-uppercase offset-md-4 btn btn-warning mb-4">Cập nhật</button>
-                                    </div>
-                                </div>
-                            </div>
-                                </table>
-                            </div>
+                            <!-- <div class="donhang-table">
+                                <table class="m-auto"> -->
+                                    <form  id="form-change">
+                                    {{ csrf_field() }} 
+                                        <div class="row form-group">
+                                            <label for="res-passwordd" class="col-md-2 offset-md-2 form-label">Mật khẩu</label>
+                                            <input type="password" autocomplete="off" class="form-control col-md-4" id="res-passwordd" name="res-passwordd">
+                                            <p class="form-message"></p>
+                                        </div>
+                                        <div class="row form-group">
+                                            <label for="res-new_passwordd" class="col-md-2 offset-md-2 form-label">Mật khẩu mới</label>
+                                            <input type="password" autocomplete="off" class="form-control col-md-4" id="res-new_passwordd" name="res-new_passwordd">
+                                            <p class="form-message col-md-2 offset-md-2 form-label"></p>
+                                        </div>
+                                        <div class="row form-group">
+                                            <label for="res-passworddcf" class="col-md-2 offset-md-2 form-label">Nhập lại mật khẩu</label>
+                                            <input type="password" autocomplete="off" class="form-control col-md-4" id="res-passworddcf" name="res-passworddcf">
+                                            <p class="form-message"></p>
+                                        </div>
+                                        <!-- <div class="capnhat my-3">
+                                            <div class="row"> -->
+                                                <button 
+                                                    type="submit" 
+                                                    id="submit-change" 
+                                                    class="button-capnhat text-uppercase offset-md-4 btn btn-warning mb-4"
+                                                    data-user_id="{{Session::get('user')->userid}}"
+                                                    data-email="{{Session::get('user')->email}}"
+                                                    >Cập nhật
+                                                </button>
+                                            <!-- </div>
+                                        </div> -->
+                                    </form>
+                                <!-- </table>
+                            </div> -->
                         </div>
 
                         <!-- nội dung tab 3: danh sách đơn hàng -->
@@ -218,8 +230,48 @@
             </div>
         </div>
     </section>
-
-
+    <script src="{{asset('public/frontend/js/validator.js')}}"></script>
+    <script>
+        $(document).ready(function() {
+            Validator({
+                form: '#form-change',
+                formGroup: '.form-group',
+                message: '.form-message',
+                rules: [
+                    Validator.isPassword('#res-new_passwordd'),
+                    Validator.isConfirm('#res-passworddcf', function() {
+                            return $('#res-new_passwordd').val();
+                        }, 'Nhập lại mật khẩu chưa đúng')
+                    ],
+                onSubmit: function(data) {
+                    let old_pass = $('#res-passwordd').val()
+                    let new_pass = $('#res-new_passwordd').val()
+                    console.log($('#res-new_passwordd').val())
+                    let confirm_pass = $('#res-passworddcf').val()
+                    let userid = $('#submit-change').data('user_id')
+                    let email = $('#submit-change').data('email')
+                    // $.ajax({
+                    //     url: "{{url('/change_password')}}",
+                    //     method: 'post',
+                    //     data: 
+                    //     {
+                    //         newPassword: new_pass,
+                    //         email: email,
+                    //         password: old_pass,
+                    //         userId: userid
+                    //     },
+                    //     headers: {
+                    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    //     },
+                    //     success: function(data) {
+                    //         $.notify(data, 'error')
+                    //     }
+                    // })
+                }
+            })
+        })
+            
+    </script>
 
 
 @endsection

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-use App\Http\Requests;
 use App\User;
 
 use Exception;
@@ -57,15 +56,38 @@ class HomeController extends Controller
         $email = $request -> email;
         $password = $request -> password;
         if(Auth::attempt(['email'=>$email, 'password'=>$password])) {
-            Session::put('user', Auth::user());
-            echo 'success';
-        } else 
+            if(Auth::user()->isdisable == 1) {
+                echo 'disabled';
+            } else {
+                Session::put('user', Auth::user());
+                echo 'success';
+            }
+        } else {
             echo 'fail';
+        }
     }
 
     public function getDangXuat(Request $request) {
         Session::remove('user');
         return Redirect::to('/'); 
+    }
+
+    public function changedPassword(Request $request) {
+        $data = $request->all();
+        $email = $data['email'];
+        $password = $data['password'];
+        $userid = $data['userId'];
+        $data = array();
+        $data['password'] = bcrypt($request->newPassword);
+        if (Auth::attempt(['email'=>$email, 'password'=>$password])) { 
+            if(User::updateUser($userid, $data)) {
+                echo 'Cập nhật thành công';
+            } else {
+                echo 'Cập nhật thất bại';
+            }
+        } else {
+                echo 'Mật khẩu chưa chính xác';
+        }
     }
 }
  

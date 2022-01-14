@@ -151,14 +151,21 @@
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                 <a class="nav-item nav-link active text-uppercase" id="nav-gioithieu-tab"
                                     data-toggle="tab" href="#nav-gioithieu" role="tab" aria-controls="nav-gioithieu"
-                                    aria-selected="true">Giới thiệu</a>
-                                    <a class="nav-item nav-link text-uppercase" id="nav-danhgia-tab" data-toggle="tab"
+                                    aria-selected="true">Giới thiệu
+                                </a>
+                                <a class="nav-item nav-link  text-uppercase" id="nav-docthu-tab"
+                                    data-toggle="tab" href="#nav-docthu" role="tab" aria-controls="nav-docthu"
+                                    aria-selected="false">Đọc thử
+                                </a>
+                                <a class="nav-item nav-link text-uppercase" id="nav-danhgia-tab" data-toggle="tab"
                                     href="#nav-binhluan" role="tab" aria-controls="nav-danhgia"
-                                    aria-selected="false">Bình luận</a>
+                                    aria-selected="false">Bình luận
+                                </a>
                                 <a class="nav-item nav-link text-uppercase" id="nav-danhgia-tab" data-toggle="tab"
                                     href="#nav-danhgia" role="tab" aria-controls="nav-danhgia"
                                     aria-selected="false">Đánh
-                                    giá của độc giả</a>
+                                    giá của độc giả
+                                </a>
                             </div>
                         </nav>
                         <!-- nội dung của từng tab  -->
@@ -229,8 +236,25 @@
                                         xây dựng thành công kế hoạch kinh doanh của riêng mình.</span>
                                 </p>
                             </div>
-                                <!-- nav-binhluan -->
-                                <div class="tab-pane fade" id="nav-binhluan" role="tabpanel"
+
+                            <!-- Đọc thử -->
+                            <div class="tab-pane fade ml-3" id="nav-docthu" role="tabpanel"
+                                aria-labelledby="nav-docthu-tab">
+                                <h6 class="tieude font-weight-bold">{{$value->bookname}}</h6>
+                                <label for="">Chọn chương:</label>
+                                <select name="" id="select_chapter" class="custom-select" style="margin:0 30px 30px 0px;">
+                                @foreach($product_summary as $key => $chapter)
+                                    <option class="chap_options" value="{{$chapter->noidung}}">{{$chapter->chuong}}</option>
+                                @endforeach
+                                </select>
+
+                                <p class="chapter">
+                                </p>
+
+                            </div>
+
+                            <!-- nav-binhluan -->
+                            <div class="tab-pane fade" id="nav-binhluan" role="tabpanel"
                                 aria-labelledby="nav-gioithieu-tab">
                                 <!-- hienthi binhluan -->
                                 <style type="text/css">
@@ -242,14 +266,15 @@
                                 </style>    
                                 <form>
                                 @csrf
-                                <div id="comment_show"></div>
-                                <input type="hidden" name="comment_product_id" class="comment_product_id" value="{{$value->bookid}}">
+                                    <div id="comment_show"></div>
+                                    <input type="hidden" name="comment_product_id" class="comment_product_id" value="{{$value->bookid}}">
 
                                 
                                 </form>
-                               
-                                    <!-- them binh luan -->
-                                    
+                            
+                            
+                                <!-- them binh luan -->
+                                
                                 <div class="col-md-5" style="margin-left:150px">
                                         <div class="tiledanhgia text-center">
                                             
@@ -262,7 +287,7 @@
                                         <div id="notify_comment"></div>
                                             <h6 class="tieude text-uppercase">GỬI BÌNH LUẬN CỦA BẠN</h6>
                                             <span class="danhgiacuaban">Bình luận của bạn về sản phẩm này:</span>
-                                         
+                                        
                                             <div class="form-group">
                                                 <input type="text" class="comment_name" placeholder="Mời bạn nhập tên">
                                             </div>
@@ -279,6 +304,7 @@
                                 </div>
                                     
                             </div>
+
                             <!-- nav-danhgia -->
                             <div class="tab-pane fade" id="nav-danhgia" role="tabpanel" aria-labelledby="nav-danhgia-tab">
                                 <div class="row">
@@ -354,7 +380,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <hr>
                             <!-- het tab nav-danhgia  -->
                         </div>
                         <!-- het tab-content  -->
@@ -368,4 +393,12 @@
         @endforeach
         <!-- het container  -->
     </section>
+    <script>
+        $('.chapter').html( $('.chap_options').val())
+        $('#select_chapter').on('change', function(e) {
+            $('.chapter').html( $(this).val())
+        })
+        
+    </script>
+
     @endsection
