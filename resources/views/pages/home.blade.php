@@ -92,7 +92,7 @@
                 <div class="row">
                     <!--header-->
                     <div class="col-12 d-flex justify-content-between align-items-center pb-2 bg-transparent pt-4">
-                        <h1 class="header text-uppercase" style="font-weight: 400;">SÁCH MỚI TUYỂN CHỌN</h1>
+                        <h1 class="header text-uppercase" style="font-weight: 600;">SÁCH MỚI TUYỂN CHỌN</h1>
                         <a href="sach-moi-tuyen-chon.html" class="btn btn-warning btn-sm text-white">Xem tất cả</a>
                     </div>
                 </div>
@@ -139,7 +139,7 @@
                 <div class="row">
                     <!--header -->
                     <div class="col-12 d-flex justify-content-between align-items-center pb-2 bg-light">
-                        <h2 class="header text-uppercase" style="font-weight: 400;">COMBO SÁCH HOT - GIẢM ĐẾN 25%</h2>
+                        <h2 class="header text-uppercase" style="font-weight: 600;">COMBO SÁCH HOT - GIẢM ĐẾN 25%</h2>
                         <a href="#" class="btn btn-warning btn-sm text-white">Xem tất cả</a>
                     </div>
                 </div>
@@ -186,7 +186,7 @@
                 <div class="row">
                     <!--header-->
                     <div class="col-12 d-flex justify-content-between align-items-center pb-2 bg-light">
-                        <h2 class="header text-uppercase" style="font-weight: 400;">SÁCH SẮP PHÁT HÀNH / ĐẶT TRƯỚC</h2>
+                        <h2 class="header text-uppercase" style="font-weight: 600;">SÁCH SẮP PHÁT HÀNH / ĐẶT TRƯỚC</h2>
                         <a href="#" class="btn btn-warning btn-sm text-white">Xem tất cả</a>
                     </div>
                 </div>
@@ -194,7 +194,7 @@
                     <!-- 1 san pham -->
                     @foreach($all_product3 as $key => $product)
                     <div class="card">
-                        <a href="#" class="motsanpham" style="text-decoration: none; color: black;"
+                        <a href="{{URL::to('/chi-tiet-san-pham/'.$product->bookid)}}" class="motsanpham" style="text-decoration: none; color: black;"
                             data-toggle="tooltip" data-placement="bottom" title="Ngoại Giao Của Chính Quyền Sài Gòn">
                             <img class="card-img-top anh" src="{{URL::to('public/frontend/images/'.$product->bookimageurl)}}"
                                 alt="ngoai-giao-cua-chinh-quyen-sai-gon">
@@ -232,14 +232,14 @@
                 <div class="row">
                     <!--header-->
                     <div class="col-12 d-flex justify-content-between align-items-center pb-2 bg-transparent pt-4">
-                        <h2 class="header text-uppercase" style="font-weight: 400;">SÁCH HAY NÊN ĐỌC</h2>
+                        <h2 class="header text-uppercase" style="font-weight: 600;">SÁCH HAY NÊN ĐỌC</h2>
                         <a href="#" class="btn btn-warning btn-sm text-white">Xem tất cả</a>
                     </div>
                     <!-- 1 san pham -->
                     @foreach($all_product4 as $key => $product)
                     <div class="col-lg col-sm-4">
                         <div class="card">
-                            <a href="#" class="motsanpham" style="text-decoration: none; color: black;"
+                            <a href="{{URL::to('/chi-tiet-san-pham/'.$product->bookid)}}" class="motsanpham" style="text-decoration: none; color: black;"
                                 data-toggle="tooltip" data-placement="bottom"
                                 title="Từng bước chân nở hoa: Khi câu kinh bước tới">
                                 <img class="card-img-top anh" src="{{URL::to('public/frontend/images/'.$product->bookimageurl)}}"

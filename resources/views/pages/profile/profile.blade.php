@@ -139,18 +139,17 @@
                                         <td>{{$row->timestamp}}</td>
                                         
                                         <td>{{$row->totalmoney}}</td>
-                                        <td>
+                                        <td >
                                             <?php if( $row->orderstatus == 0) 
                                                         echo "Đang chờ phê duyệt" ;
                                                     elseif($row->orderstatus == 1) 
                                                         echo "Đã phê duyệt";
                                                     else 
                                                         echo "Đã từ chối";
-                                        ?>
+                                            ?>
                                         </td>
                                         <td>
-                                        <!-- <button href="{{URL::to('/show-details-ordered/'.$row->orderid)}}"  data-target="#form" data-toggle="modal" style="width:100px;height:30px;background-color:blanchedalmond"
-                                              >Xem chi tiết </button> -->
+                                       
                                     <a  href="{{URL::to('/show-details-ordered/'.$row->orderid)}}" data-target="#form"
                                         style="display:inline-block">Xem chi tiết</a>
                                         </td>

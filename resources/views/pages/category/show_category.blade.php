@@ -72,7 +72,7 @@
                                             alt="lap-ke-hoach-kinh-doanh-hieu-qua">
                                         <div class="card-body noidungsp mt-3">
                                             <h6 class="card-title ten">{{$product->bookname}}</h6>
-                                            <small class="tacgia text-muted">Brian Finch</small>
+                                            <small class="tacgia text-muted">{{$product->nxb}}</small>
                                             <div class="gia d-flex align-items-baseline">
                                                 <div class="giamoi">111.200 ₫</div>
                                                 <div class="giacu text-muted">139.000 ₫</div>
@@ -105,7 +105,7 @@
                                             alt="lap-ke-hoach-kinh-doanh-hieu-qua">
                                         <div class="card-body noidungsp mt-3">
                                             <h6 class="card-title ten">{{$product->bookname}}</h6>
-                                            <small class="tacgia text-muted">Brian Finch</small>
+                                            <small class="tacgia text-muted">{{$product->nxb}}</small>
                                             <div class="gia d-flex align-items-baseline">
                                                 <div class="giamoi">111.200 ₫</div>
                                                 <div class="giacu text-muted">139.000 ₫</div>

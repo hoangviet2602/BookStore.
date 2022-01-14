@@ -24,7 +24,7 @@ class CheckoutController extends Controller
         $data_order['receivername'] = $request->name;
         $data_order['phone'] = $request->phone;
         $data_order['address'] = $request->address;
-        $data_order['totalmoney'] = Cart::total()." đ";
+        $data_order['totalmoney'] = Cart::subtotal()." đ";
         $data_order['orderstatus'] = 0;
         $orderid = Db::table('orders')->insertGetId($data_order);
 

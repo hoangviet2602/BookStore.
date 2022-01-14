@@ -20,7 +20,7 @@ class ProfileController extends Controller
 {
     public function show_profile(){
         $userid = Session::get('user')->userid;
-        $ordered = DB::table('orders')->where('userid',$userid)->get(); 
+        $ordered = DB::table('orders')->where('userid',$userid)->orderBy('orderid', 'DESC')->get(); 
         $cate_product = DB::table('categories')->where('categories.parent',1)->get();
         $sub_cate = DB::table('categories')->where('categories.parent','!=',1)->get();
         

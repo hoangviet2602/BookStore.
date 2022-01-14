@@ -118,7 +118,7 @@
                                                 <?php  $subtotal = $v_content->price * $v_content->qty;
                                                     echo number_format($subtotal) ;
                                                 ?>đ
-                                            </div>
+                                            </div>  
                                             <span class="remove mt-auto" >
                                                 <a href="{{URL::to('/delete-to-cart/'.$v_content->rowId)}}"><i class="far fa-trash-alt" ></i></a>
                                             </span>
