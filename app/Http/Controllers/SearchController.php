@@ -28,6 +28,7 @@ class SearchController extends Controller
         $data = $request->all();
         $results  = DB::table('books')->where('bookname','like', '%'.$data['searchKey'].'%')->limit(2)->get();
         $output = '';
+        
         foreach($results as $key => $product) {
             $output .= '<li class="input-resultlist">
                             <a class="row input-result__item" href="http://localhost/WebNC/chi-tiet-san-pham/'.$product->bookid.'">
