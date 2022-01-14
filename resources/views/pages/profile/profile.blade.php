@@ -77,24 +77,40 @@
                             <div class="offset-md-4 mt-3">
                                 <h3 class="account-header">Thông tin tài khoản</h3>
                             </div>
+                            <form method="post" action="{{URL::to('/update-profile')}}">
+                            {{ csrf_field() }}
+                                @foreach($in4_user as $key => $info)
                             <div class="hoten my-3">
-                                <div class="row">
-                                    <label class="col-md-2 offset-md-2" for="account-hoten">Họ tên</label>
-                                    <input class="col-md-4" type="text" name="account-hoten">
-                                </div>
-                            </div>
-                            <div class="email my-3">
-                                <div class="row">
-                                    <label class="col-md-2 offset-md-2" for="account-email">Địa chỉ email</label>
-                                    <input class="col-md-4" type="text" name="account-email" disabled="disabled" value="abc@gmail.com">
-                                </div>
-                            </div>
-                            <div class="capnhat my-3">
+                                <div class="email my-3">
                                     <div class="row">
-                                        <button type="button" class="button-capnhat text-uppercase offset-md-4 btn btn-warning mb-4">Cập nhật</button>
+                                        <label class="col-md-2 offset-md-2" for="account-email">Địa chỉ email</label>
+                                        <input class="col-md-4" type="text" name="account-email" disabled="disabled" value="{{$info->email}}">
                                     </div>
                                 </div>
-                            
+                                <div class="row">
+                                    <label class="col-md-2 offset-md-2" >Họ tên</label>
+                                    <input class="col-md-4" type="text" name="hoten" value="{{$info->fullname}}">
+                                </div>
+                                </br>
+                                <div class="row">
+                                    <label class="col-md-2 offset-md-2" >Số điện thoại</label>
+                                    <input class="col-md-4" type="text" name="phone" value="{{$info->phone}}">
+                                </div>
+                               
+                                
+                                </br>
+                                <div class="row">
+                                    <label class="col-md-2 offset-md-2" >Địa chỉ</label>
+                                    <input class="col-md-4" type="text" name="address" value="{{$info->address}}">
+                                </div>
+                            </div>
+                                @endforeach
+                            <div class="capnhat my-3">
+                                    <div class="row">
+                                        <button type="submit" class="button-capnhat text-uppercase offset-md-4 btn btn-warning mb-4">Cập nhật</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- nội dung tab 2: đổi mật khẩu-->
                         <div class="tab-pane fade py-3" id="nav-doimatkhau" role="tabpanel" aria-labelledby="nav-donhang-tab">
@@ -156,6 +172,8 @@
                                                         echo "Đang chờ phê duyệt" ;
                                                     elseif($row->orderstatus == 1) 
                                                         echo "Đã phê duyệt";
+                                                    elseif($row->orderstatus == 2) 
+                                                        echo "Đã giao";
                                                     else 
                                                         echo "Đã từ chối";
                                             ?>

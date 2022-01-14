@@ -13,7 +13,7 @@ use Illuminate\Foundation\Console\Presets\React;
 use Illuminate\Support\Facades\Redirect;
 use App\User;
 use Symfony\Component\Console\Output\Output;
-
+Use App\Http\Controllers\alert;
 session_start();
 
 class ProfileController extends Controller
@@ -23,8 +23,10 @@ class ProfileController extends Controller
         $ordered = DB::table('orders')->where('userid',$userid)->orderBy('orderid', 'DESC')->get(); 
         $cate_product = DB::table('categories')->where('categories.parent',1)->get();
         $sub_cate = DB::table('categories')->where('categories.parent','!=',1)->get();
+        $in4_user = DB::table('users')->where('userid','=',Session::get('user')->userid)->get();
         
-        return view('pages.profile.profile')->with('ordered',$ordered)->with('category',$cate_product)->with('sub_cate',$sub_cate);
+        return view('pages.profile.profile')->with('ordered',$ordered)->with('category',$cate_product)->with('sub_cate',$sub_cate)
+        ->with('in4_user',$in4_user);
     }
 
     public function show_details_ordered($orderid){
@@ -33,11 +35,12 @@ class ProfileController extends Controller
         $cate_product = DB::table('categories')->where('categories.parent',1)->get();
         $sub_cate = DB::table('categories')->where('categories.parent','!=',1)->get();
         // $orderdetail = DB::table('ordersdetails')->where('orderid',$orderid)->get();
-        
+        $in4_user = DB::table('users')->where('userid','=',Session::get('user')->userid)->get();
         $orderdetail = DB::table('ordersdetails')->join('books','ordersdetails.bookid','=','books.bookid')->where(
             'orderid',$orderid)->get();
 
-        return view('pages.profile.profile')->with('ordered',$ordered)->with('details',$orderdetail)->with('category',$cate_product)->with('sub_cate',$sub_cate);;
+        return view('pages.profile.profile')->with('ordered',$ordered)->with('details',$orderdetail)
+        ->with('in4_user',$in4_user)->with('category',$cate_product)->with('sub_cate',$sub_cate);;
     }
     public function load_comment(Request $request){
         $product_id = $request->product_id;
@@ -68,19 +71,27 @@ class ProfileController extends Controller
         echo  $output;
     }
     public function send_comment(Request $request){
-        // $product_id = $request->product_id;
-        // $name = $request->comment_name;
-        // $email = $request->comment_email;
-        // $noidung = $request->comment_content;
+   
         $data = array();
         $data['bookid'] = '000'.$request->product_id;
         $data['ten'] = $request->comment_name;
         $data['email'] = $request->comment_email;
         $data['noidung'] = $request->comment_content;
        
-        
-        
+
         Db::table('binhluan')->insert($data);
         
+    }
+
+    public function update_profile(Request $request){
+            $fullname = $request->hoten;
+            $phone = $request->phone;
+            $address = $request->address;
+
+            DB::update('update users set fullname = ?,phone=?,address=? where userid = ?',
+            [$fullname,$phone,$address,Session::get('user')->userid]);
+            
+                             
+            return Redirect::to('/show-profile');
     }
 }

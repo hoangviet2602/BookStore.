@@ -192,16 +192,16 @@
                                             {{csrf_field()}}
                                             <div class="form-label-group">
                                                 <input type="text" id="inputName" class="form-control"
-                                                    placeholder="Nhập họ và tên" name="name" required autofocus>
+                                                    placeholder="Nhập họ và tên" name="name" required autofocus value="{{Session::get('user')->fullname}}">
                                             </div>
                                             <div class="form-label-group">
                                                 <input type="text" id="inputPhone" class="form-control"
-                                                    placeholder="Nhập số điện thoại" name="phone" required>
+                                                    placeholder="Nhập số điện thoại" name="phone" required value="{{Session::get('user')->phone}}">
                                             </div>
                                             
                                             <div class="form-label-group">
                                                 <input type="text" id="inputAddress" class="form-control"
-                                                    placeholder="Nhập Địa chỉ giao hàng" name="address" required>
+                                                    placeholder="Nhập Địa chỉ giao hàng" name="address" required value="{{Session::get('user')->address}}">
                                             </div>
                                             
                                             <div class="form-label-group">

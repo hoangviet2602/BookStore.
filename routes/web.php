@@ -35,6 +35,7 @@ Route::get('/show-profile', 'ProfileController@show_profile');
 Route::get('/show-details-ordered/{orderid}', 'ProfileController@show_details_ordered');
 Route::post('/load-comment', 'ProfileController@load_comment');
 Route::post('/send-comment', 'ProfileController@send_comment');
+Route::post('/update-profile', 'ProfileController@update_profile');
 
 //login
 Route::post('/dangky', 'HomeController@postDangKy');
