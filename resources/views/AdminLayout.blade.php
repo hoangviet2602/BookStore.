@@ -123,6 +123,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <li class="sub-menu">
                     <a class="menu-title" href="javascript:;">
                         <i class="fa fa-book"></i>
+                        <span>Quản lý sách</span>
+                    </a>
+                    <ul class="sub"> 
+                        <li><a href="{{URL::to('/show_add_books')}}">Thêm sách</a></li> 
+                        <li><a href="{{URL::to('/show_books')}}">Tất cả</a></li> 
+                    </ul>
+                </li>
+
+                <li class="sub-menu">
+                    <a class="menu-title" href="javascript:;">
+                        <i class="fa fa-book"></i>
                         <span>Quản lý tài khoản</span>
                     </a>
                     <ul class="sub"> 

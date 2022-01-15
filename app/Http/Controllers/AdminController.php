@@ -52,4 +52,24 @@ class AdminController extends Controller
         Session::remove('id');
         return  Redirect::to('/admin'); 
     }
+
+    public function show_all_books() {
+        // $this->auth_login_admin();
+        // SELECT * from books INNER JOIN nxb on books.nxbid = nxb.nxbid
+        $list_books = DB::table('books')->join('nxb', 'books.nxbid', '=', 'nxb.nxbid')->get();
+        $books = view('admin.AllBook')
+                            ->with('list_books', $list_books);
+        // return view('AdminLayout')->with('admin.all_category', $manager_category);
+        return $books;
+    }
+
+    public function show_add_books() {
+        $list_nxb = DB::table('nxb')->get();
+        $list_danhmuc = DB::table('categories')->limit(5)->get();
+        $books = view('admin.AddBook')
+                            ->with('list_nxb', $list_nxb)
+                            ->with('list_danhmuc', $list_danhmuc);
+        // return view('AdminLayout')->with('admin.all_category', $manager_category);
+        return $books;
+    }
 }

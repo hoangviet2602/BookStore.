@@ -28,45 +28,37 @@
       </div> 
     </div> 
     <div class="table-responsive"> 
-      <table class="table table-striped b-t b-light" id="myTable"> 
+      <table class="table table-striped b-t b-light"> 
         <thead> 
           <tr> 
-            <th style="width:20px;"> 
-              <label class="i-checks m-b-none"> 
-                <input type="checkbox"><i></i> 
-              </label> 
+            <th style="width:20px;">
             </th> 
-            <th>Tên danh mục</th> 
-            <th>Thao tác</th> 
-            <th style="width:30px;"></th> 
+            <th>Tên sách</th> 
+            <th>Số trang</th>
+            <th>Nhà xuất bảng</th>
+            <th>Số lượng</th>
+            <th>Giá</th>
+            <th></th> 
           </tr> 
         </thead> 
 
         <tbody> 
-          @foreach($list_category as $key=>$category)
+          @foreach($list_books as $key=>$book)
           <tr> 
             <td>
-              <label class="i-checks m-b-none">
-              <input type="checkbox" name="post[]">
-              <i></i>
-              </label>
+                <img style="width: 150px; height: 150px" src="{{URL::to('public/frontend/images/'.$book->bookimageurl)}}" alt="">
             </td> 
-
-            <td>{{$category->categoryname}}</td> 
-
-            <!-- <td>
-              <a href="" class="active" ui-toggle-class="">
-                <i class="fa fa-check textsuccess text-active"></i>
-                <i class="fa fa-times text-danger text"></i>
-              </a> 
-            </td>  -->
-
+            <td>{{$book->bookname}}</td> 
+            <td>{{$book->bookpages}}</td> 
+            <td>{{$book->nxb}}</td> 
+            <td>{{$book->quantity}}</td> 
+            <td>{{$book->price}}</td> 
             <td>
               <button class="btn btn-warning">
-                <a href="{{URL::to('update_category/'.$category->categoryid)}}">Sửa</a>
+                <a href="{{URL::to('update_book/'.$book->bookid)}}">Sửa</a>
               </button>
               <button class="btn btn-danger">
-                <a href="{{URL::to('/delete_category/'.$category->categoryid)}}">Xóa</a>
+                <a href="{{URL::to('/delete_book/'.$book->bookid)}}">Xóa</a>
               </button>
             </td>
           </tr> 
@@ -93,7 +85,4 @@
       </div> 
     </footer> 
   </div> 
-  <script>
-    $('#myTable').DataTable();
-  </script>
 @endsection()

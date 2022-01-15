@@ -20,6 +20,10 @@ Route::get('/danh-muc-san-pham/{categoryid}', 'CategoryProduct@show_category_hom
 Route::get('/chi-tiet-san-pham/{bookid}', 'ProductController@details_product');
 Route::post('/change_password', 'HomeController@changedPassword');
 
+// books
+Route::get('/show_books', 'AdminController@show_all_books');
+Route::get('/show_add_books', 'AdminController@show_add_books');
+
 //cart
 Route::post('/save-cart', 'CartController@save_cart');
 Route::get('/show-cart', 'CartController@show_cart');
