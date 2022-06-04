@@ -16,7 +16,9 @@ class SearchController extends Controller
         $searchKey = $request->search_key;
         $cate_product = DB::table('categories')->where('categories.parent',1)->get(); 
         $sub_cate = DB::table('categories')->where('categories.parent','!=',1)->get();
-        $search_results = DB::table('books')->where('bookname','like', '%'.$searchKey.'%')->paginate(12);
+        $search_results = DB::table('books')->join('nxb','books.nxbid','=','nxb.nxbid')->where('bookname','like', '%'.$searchKey.'%')
+        ->orWhere('nxb','like', '%'.$searchKey.'%')
+        ->paginate(12);
         return view('pages.searchresult.search_result')
                     ->with('category',$cate_product)
                     ->with('search_key',$searchKey)
@@ -31,8 +33,8 @@ class SearchController extends Controller
         
         foreach($results as $key => $product) {
             $output .= '<li class="input-resultlist">
-                            <a class="row input-result__item" href="http://localhost:8080/BookStore2/chi-tiet-san-pham/'.$product->bookid.'">
-                                <img src="http://localhost:8080/Bookstore2/public/frontend/images/'.$product->bookimageurl.'" alt="" class="col-lg-32 col-md-2 col-xs-2">
+                            <a class="row input-result__item" href="http://localhost/WebNC/chi-tiet-san-pham/'.$product->bookid.'">
+                                <img src="http://localhost/WebNC/public/frontend/images/'.$product->bookimageurl.'" alt="" class="col-lg-32 col-md-2 col-xs-2">
                                 <div class="info row">
                                     <h4 class=" col-lg-12 col-md-12 col-xs-12">'.$product->bookname.'</h4>
                                     <h5>'.number_format($product->price).'đ</h5>
